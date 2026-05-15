@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Privacy Policy for SEAHORSE, the personal AI agent for neurodivergent brains, built by Ironbridge Games LTD.">
+<meta name="theme-color" content="#0A2540">
+<title>Privacy Policy · SEAHORSE</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+:root {
+    --navy: #0A2540; --navy-deep: #050F1F; --navy-soft: #14304D;
+    --cream: #F2F4F7; --cream-warm: #F6F8FA;
+    --white: #FFF; --teal: #4A8B8E; --teal-soft: #B8D4D6;
+    --rose: #C97970; --amber: #D69E2E;
+    --text: #1A2B3D; --text-soft: #5A6B7E; --text-mute: #8B9AAE;
+    --line: rgba(10,37,64,0.12); --line-soft: rgba(10,37,64,0.06);
+    --narrow: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.7; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; }
+.container { max-width: var(--narrow); margin: 0 auto; padding: 0 24px; }
+
+/* PILL NAV (reused for consistency) */
+.pill-nav { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: rgba(10,37,64,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 100px; padding: 8px 10px 8px 24px; display: flex; align-items: center; gap: 8px; z-index: 100; box-shadow: 0 20px 56px rgba(10,37,64,0.28), 0 3px 8px rgba(10,37,64,0.12); border: 1px solid rgba(255,255,255,0.08); }
+.pill-brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: 0.5px; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 6px; }
+.pill-brand img { width: 26px; height: 26px; }
+.pill-links { display: flex; gap: 2px; list-style: none; }
+.pill-links a { color: rgba(242,244,247,0.7); text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 17px; border-radius: 100px; transition: all .15s; }
+.pill-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+@media (max-width: 720px) { .pill-nav { padding: 8px 14px; top: 12px; } .pill-links li:not(.cta) { display: none; } .pill-brand { padding-right: 12px; margin-right: 0; } }
+
+/* HEADER */
+header.policy-head { padding: 140px 0 40px; text-align: center; }
+.eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 6px 14px; background: rgba(74,139,142,0.1); border: 1px solid rgba(74,139,142,0.2); border-radius: 100px; margin-bottom: 24px; }
+h1 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; color: var(--navy); margin-bottom: 14px; }
+h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.subline { font-size: 16px; color: var(--text-soft); }
+@media (max-width: 720px) { h1 { font-size: 36px; letter-spacing: -1px; } header.policy-head { padding: 110px 0 30px; } }
+
+/* DRAFT BANNER */
+.draft-banner { max-width: var(--narrow); margin: 0 auto 40px; padding: 18px 24px; background: rgba(214,158,46,0.08); border: 1px solid rgba(214,158,46,0.3); border-radius: 12px; }
+.draft-banner strong { color: var(--navy); font-weight: 700; }
+.draft-banner p { font-size: 14px; color: var(--text); line-height: 1.55; }
+.draft-banner p + p { margin-top: 8px; }
+
+/* CONTENT */
+main.policy { padding: 20px 0 80px; }
+main.policy h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: var(--navy); margin: 56px 0 14px; }
+main.policy h2:first-of-type { margin-top: 0; }
+main.policy h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin: 28px 0 10px; }
+main.policy p { margin-bottom: 18px; font-size: 16px; line-height: 1.7; color: var(--text); }
+main.policy ul { margin: 0 0 22px 22px; }
+main.policy li { margin-bottom: 10px; line-height: 1.6; color: var(--text); }
+main.policy strong { color: var(--navy); font-weight: 600; }
+main.policy a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+main.policy a:hover { color: var(--navy); }
+.callout { background: var(--white); border: 1px solid var(--line-soft); border-radius: 14px; padding: 22px 26px; margin: 22px 0; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: var(--navy); }
+
+/* FOOTER */
+footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-top: 1px solid var(--line-soft); background: var(--cream-warm); }
+.footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; max-width: var(--narrow); margin: 0 auto; padding: 0 24px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; color: var(--navy); font-weight: 700; font-size: 16px; }
+.footer-brand img { width: 24px; height: 24px; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--text-mute); text-decoration: none; font-size: 13px; }
+.footer-links a:hover { color: var(--navy); }
+.footer-legal { width: 100%; padding-top: 24px; margin-top: 24px; border-top: 1px solid var(--line-soft); text-align: center; color: var(--text-mute); font-size: 12px; line-height: 1.6; max-width: var(--narrow); margin-left: auto; margin-right: auto; }
+.footer-legal strong { color: var(--text-soft); }
+</style>
+</head>
+<body>
+
+<nav class="pill-nav">
+    <a href="index.html" class="pill-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></a>
+    <ul class="pill-links">
+        <li><a href="index.html#what">What it does</a></li>
+        <li><a href="index.html#story">Story</a></li>
+        <li><a href="index.html#status">Status</a></li>
+    </ul>
+</nav>
+
+<header class="policy-head">
+    <div class="container">
+        <span class="eyebrow">Legal</span>
+        <h1>Privacy <em>Policy</em></h1>
+        <p class="subline">Last updated: 15 May 2026</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="draft-banner">
+        <p><strong>Plain-English summary.</strong> Seahorse is designed to keep your data on your computer. We collect the bare minimum to deliver the product (your email if you sign up, your licence purchase via Lemon Squeezy, and an optional anonymous monthly heartbeat). We do not sell data. We do not run analytics that profile you. The legal text below explains all of this in detail.</p>
+        <p>Some systems described below — licence verification, billing via Lemon Squeezy, and the optional anonymous telemetry — activate when Seahorse moves from early access to public launch. During the early-access period Seahorse runs fully local and none of those calls are made.</p>
+    </div>
+</div>
+
+<main class="policy">
+<div class="container">
+
+<h2>1. Who we are</h2>
+<p>This Privacy Policy applies to <strong>SEAHORSE</strong>, a desktop application and accompanying website (seahorseapp.co.uk) operated by <strong>Ironbridge Games LTD</strong> (Company No. 16882669), a company registered in England and Wales with its registered office at 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ, United Kingdom.</p>
+<p>For the purposes of UK GDPR and the Data Protection Act 2018, Ironbridge Games LTD is the <strong>data controller</strong> for personal data we process. You can reach our data contact at <a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a>.</p>
+
+<h2>2. What data we collect, and why</h2>
+<p>We have deliberately built Seahorse so that the vast majority of your data never leaves your computer. The categories below cover everything we ever touch.</p>
+
+<h3>2.1 Email address (only if you choose to give it)</h3>
+<p>When you sign up via the form on seahorseapp.co.uk, or when you purchase a Seahorse licence, we collect your email address. We use it to:</p>
+<ul>
+    <li>Send you Seahorse product updates and major release notifications.</li>
+    <li>Deliver your licence key after purchase.</li>
+    <li>Reply to support requests you send us.</li>
+</ul>
+<p>We never sell, rent, or share your email with third parties for marketing. You can unsubscribe at any time using the link in any email we send, or by emailing the address above.</p>
+
+<h3>2.2 Purchase and billing information</h3>
+<p>If you buy a Seahorse licence, the payment is processed by <strong>Lemon Squeezy</strong> (Lemon Squeezy LLC), who act as the merchant of record. They collect and process your name, billing address, payment method, and email address under their own privacy policy at <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">lemonsqueezy.com/privacy</a>. Ironbridge receives only your email address and the fact that you bought a licence. We never see your card number or full billing address.</p>
+
+<h3>2.3 Licence verification calls</h3>
+<p>Once activated, the Seahorse app contacts our licence server (hosted on Cloudflare) periodically (roughly once per month) to verify your licence key is still valid. These calls send:</p>
+<ul>
+    <li>Your licence key.</li>
+    <li>A random per-install device ID (generated locally on first launch, not derived from your hardware).</li>
+</ul>
+<p>No conversation content, no Brain data, no connector data, no usage statistics, no IP-address-based profiling beyond the standard Cloudflare access logs (which are retained for fraud detection only).</p>
+
+<h3>2.4 Optional anonymous telemetry</h3>
+<p>If you turn it on in Settings (it is <strong>off by default</strong>), Seahorse will send a single message once per month containing: a random installation identifier, the current Seahorse version, and the month it was opened. No keystrokes, no content, no behaviour data, no personally identifiable information. The purpose is to know how many people are actively using Seahorse. You can turn it off again at any time, and any past anonymous identifiers cannot be linked back to you.</p>
+
+<h3>2.5 Cookies on the website</h3>
+<p>seahorseapp.co.uk uses only strictly-necessary cookies. We do not use Google Analytics, Facebook Pixel, or any cross-site tracking. If you submit the signup form, a small Cloudflare Turnstile cookie may be set to verify you are not a bot. That cookie is set by Cloudflare on a single page-load and expires shortly after.</p>
+
+<h2>3. What data we DO NOT collect</h2>
+<p>This list is deliberate. None of these things ever leave your computer or reach Ironbridge:</p>
+<ul>
+    <li>The contents of any chat conversation you have with Seahorse.</li>
+    <li>The contents of your Brain (memory cards, notes, reminders, calendar, journal entries).</li>
+    <li>Any data from services you connect (Slack messages, Notion pages, Jira issues, calendar events, emails, etc.).</li>
+    <li>Voice recordings of any kind. Seahorse converts speech to text locally and immediately discards the audio.</li>
+    <li>Access tokens and credentials for connected services. These are stored locally on your device — in your operating system's secure keychain where supported, otherwise in your local application-data folder under your OS account protection — and are never transmitted to Ironbridge.</li>
+    <li>API keys for optional cloud AI providers (Claude, OpenAI). These are stored locally and used by Seahorse to talk directly to those providers from your machine.</li>
+</ul>
+
+<h2>4. Optional cloud AI</h2>
+<p>Seahorse runs primarily on a <strong>local AI model on your machine</strong>, so day-to-day use sends nothing off your device. If you choose to opt in to a cloud AI provider (Anthropic Claude or OpenAI) using your own API key, the conversation context for those specific requests will be sent to that provider. From that point, the provider's own privacy policy applies:</p>
+<ul>
+    <li>Anthropic: <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">anthropic.com/legal/privacy</a></li>
+    <li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">openai.com/policies/privacy-policy</a></li>
+</ul>
+<p>Cloud AI is off by default. You can turn it on, off, or switch providers at any time in Settings. Ironbridge never sees the content of those requests.</p>
+
+<h2>5. Lawful basis for processing</h2>
+<p>Under UK GDPR, we rely on the following lawful bases:</p>
+<ul>
+    <li><strong>Contract</strong>, for processing your purchase and delivering your licence (Article 6(1)(b)).</li>
+    <li><strong>Legitimate interests</strong>, for sending product updates to existing users and for fraud-detection access logs (Article 6(1)(f)).</li>
+    <li><strong>Consent</strong>, for marketing emails to new sign-ups, for optional telemetry, and for any optional cloud-AI usage (Article 6(1)(a)). You may withdraw consent at any time.</li>
+</ul>
+
+<h2>6. Third-party processors</h2>
+<p>We use a small number of processors to deliver Seahorse. Each is contractually bound by a data-processing agreement.</p>
+<ul>
+    <li><strong>Cloudflare</strong> (USA, with UK/EU presence), hosts our website, OAuth Worker, signup KV, and licence server. Privacy policy: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>.</li>
+    <li><strong>Lemon Squeezy</strong> (USA), processes payments as merchant of record. Privacy policy linked above.</li>
+    <li><strong>Zoho Corporation</strong> (India / EU presence), if you receive email from us via Zoho Campaigns. Privacy policy: <a href="https://www.zoho.com/privacy.html" target="_blank" rel="noopener">zoho.com/privacy</a>.</li>
+    <li><strong>Anthropic</strong> and <strong>OpenAI</strong>, ONLY if you have opted in to cloud AI and used your own API key. They process data on your behalf, not ours.</li>
+</ul>
+
+<h2>7. International transfers</h2>
+<p>Some of our processors are based outside the UK. Where personal data leaves the UK or EEA, we rely on UK and EU approved transfer mechanisms (Standard Contractual Clauses and the UK International Data Transfer Addendum). Cloudflare and Lemon Squeezy have published their compliance with these mechanisms.</p>
+
+<h2>8. How long we keep your data</h2>
+<ul>
+    <li><strong>Email on the signup list</strong>, kept until you unsubscribe or we close the project.</li>
+    <li><strong>Licence records</strong> (key, purchase email, purchase date), kept for the lifetime of the licence plus 7 years for accounting purposes as required by HMRC.</li>
+    <li><strong>Access logs on the OAuth Worker and licence server</strong>, kept for 30 days for fraud detection, then deleted.</li>
+    <li><strong>Anonymous telemetry</strong>, aggregated monthly, no per-user retention beyond the current month.</li>
+</ul>
+
+<h2>9. Your rights under UK GDPR</h2>
+<p>You have the right to:</p>
+<ul>
+    <li><strong>Access</strong> the personal data we hold about you.</li>
+    <li><strong>Rectify</strong> inaccurate data.</li>
+    <li><strong>Erase</strong> your data (we will honour this within 30 days; note that licence-purchase records may be retained for HMRC compliance).</li>
+    <li><strong>Restrict</strong> processing while a complaint is investigated.</li>
+    <li><strong>Object</strong> to processing based on legitimate interests, including marketing.</li>
+    <li><strong>Portability</strong>, receive your data in a structured machine-readable format.</li>
+    <li><strong>Withdraw consent</strong> at any time without affecting prior lawful processing.</li>
+</ul>
+<p>To exercise any of these rights, email <a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a>. We will respond within 30 days.</p>
+<p>You also have the right to complain to the UK Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
+
+<h2>10. Children</h2>
+<p>Seahorse is not directed at children under 16. We do not knowingly collect personal data from anyone under 16. If you believe a child has provided us with personal data, please contact us and we will delete it.</p>
+
+<h2>11. Security</h2>
+<p>We take the following measures to protect personal data:</p>
+<ul>
+    <li>All website and API traffic is encrypted in transit (HTTPS, TLS 1.2 or later).</li>
+    <li>Licence keys are stored in Cloudflare KV with access restricted to the licence Worker.</li>
+    <li>OAuth client secrets are stored as encrypted Cloudflare Worker secrets, never on user machines.</li>
+    <li>Lemon Squeezy is PCI-DSS compliant and we never see card data.</li>
+    <li>Local app data (Brain, connector credentials) lives on your device, protected by your operating system's account-level security, with access tokens placed in the OS secure keychain where the platform supports it.</li>
+</ul>
+
+<h2>12. Changes to this policy</h2>
+<p>We may update this policy from time to time. When we do, we will change the "last updated" date at the top, and (for material changes) email everyone on the signup list. The latest version always lives at seahorseapp.co.uk/privacy.</p>
+
+<h2>13. Contact</h2>
+<p>Questions, complaints, or rights requests:</p>
+<p><strong>Henry Kelly</strong><br>
+Ironbridge Games LTD<br>
+2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ, United Kingdom<br>
+<a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a></p>
+
+</div>
+</main>
+
+<footer>
+    <div class="footer-row">
+        <div class="footer-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></div>
+        <div class="footer-links">
+            <a href="index.html#what">What it does</a>
+            <a href="index.html#proof">Proof</a>
+            <a href="index.html#status">Status</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="mailto:henry@seahorseapp.co.uk">Contact</a>
+        </div>
+    </div>
+    <div class="footer-legal">
+        © 2026 <strong>Ironbridge Games LTD</strong> · Company No. 16882669 · 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ<br>
+        Built with care in Kent
+    </div>
+</footer>
+
+</body>
+</html>

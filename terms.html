@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Terms of Service and Licence Agreement for SEAHORSE, the personal AI agent for neurodivergent brains, built by Ironbridge Games LTD.">
+<meta name="theme-color" content="#0A2540">
+<title>Terms &amp; Licence · SEAHORSE</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+:root {
+    --navy: #0A2540; --navy-deep: #050F1F; --navy-soft: #14304D;
+    --cream: #F2F4F7; --cream-warm: #F6F8FA;
+    --white: #FFF; --teal: #4A8B8E; --teal-soft: #B8D4D6;
+    --rose: #C97970; --amber: #D69E2E;
+    --text: #1A2B3D; --text-soft: #5A6B7E; --text-mute: #8B9AAE;
+    --line: rgba(10,37,64,0.12); --line-soft: rgba(10,37,64,0.06);
+    --narrow: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.7; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; }
+.container { max-width: var(--narrow); margin: 0 auto; padding: 0 24px; }
+
+.pill-nav { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: rgba(10,37,64,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 100px; padding: 8px 10px 8px 24px; display: flex; align-items: center; gap: 8px; z-index: 100; box-shadow: 0 20px 56px rgba(10,37,64,0.28), 0 3px 8px rgba(10,37,64,0.12); border: 1px solid rgba(255,255,255,0.08); }
+.pill-brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: 0.5px; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 6px; }
+.pill-brand img { width: 26px; height: 26px; }
+.pill-links { display: flex; gap: 2px; list-style: none; }
+.pill-links a { color: rgba(242,244,247,0.7); text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 17px; border-radius: 100px; transition: all .15s; }
+.pill-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+@media (max-width: 720px) { .pill-nav { padding: 8px 14px; top: 12px; } .pill-links li:not(.cta) { display: none; } .pill-brand { padding-right: 12px; margin-right: 0; } }
+
+header.policy-head { padding: 140px 0 40px; text-align: center; }
+.eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 6px 14px; background: rgba(74,139,142,0.1); border: 1px solid rgba(74,139,142,0.2); border-radius: 100px; margin-bottom: 24px; }
+h1 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; color: var(--navy); margin-bottom: 14px; }
+h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.subline { font-size: 16px; color: var(--text-soft); }
+@media (max-width: 720px) { h1 { font-size: 36px; letter-spacing: -1px; } header.policy-head { padding: 110px 0 30px; } }
+
+.draft-banner { max-width: var(--narrow); margin: 0 auto 40px; padding: 18px 24px; background: rgba(214,158,46,0.08); border: 1px solid rgba(214,158,46,0.3); border-radius: 12px; }
+.draft-banner strong { color: var(--navy); font-weight: 700; }
+.draft-banner p { font-size: 14px; color: var(--text); line-height: 1.55; }
+
+main.policy { padding: 20px 0 80px; }
+main.policy h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: var(--navy); margin: 56px 0 14px; }
+main.policy h2:first-of-type { margin-top: 0; }
+main.policy h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin: 28px 0 10px; }
+main.policy p { margin-bottom: 18px; font-size: 16px; line-height: 1.7; color: var(--text); }
+main.policy ul { margin: 0 0 22px 22px; }
+main.policy li { margin-bottom: 10px; line-height: 1.6; color: var(--text); }
+main.policy strong { color: var(--navy); font-weight: 600; }
+main.policy a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+main.policy a:hover { color: var(--navy); }
+
+footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-top: 1px solid var(--line-soft); background: var(--cream-warm); }
+.footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; max-width: var(--narrow); margin: 0 auto; padding: 0 24px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; color: var(--navy); font-weight: 700; font-size: 16px; }
+.footer-brand img { width: 24px; height: 24px; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--text-mute); text-decoration: none; font-size: 13px; }
+.footer-links a:hover { color: var(--navy); }
+.footer-legal { width: 100%; padding-top: 24px; margin-top: 24px; border-top: 1px solid var(--line-soft); text-align: center; color: var(--text-mute); font-size: 12px; line-height: 1.6; max-width: var(--narrow); margin-left: auto; margin-right: auto; }
+.footer-legal strong { color: var(--text-soft); }
+</style>
+</head>
+<body>
+
+<nav class="pill-nav">
+    <a href="index.html" class="pill-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></a>
+    <ul class="pill-links">
+        <li><a href="index.html#what">What it does</a></li>
+        <li><a href="index.html#story">Story</a></li>
+        <li><a href="index.html#status">Status</a></li>
+    </ul>
+</nav>
+
+<header class="policy-head">
+    <div class="container">
+        <span class="eyebrow">Legal</span>
+        <h1>Terms &amp; <em>Licence</em></h1>
+        <p class="subline">Last updated: 15 May 2026</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="draft-banner">
+        <p><strong>Plain-English summary.</strong> You can use SEAHORSE on your own devices once you have a valid licence. The first 50 sign-ups get a permanent free licence. Everyone after pays £4.99 one-off (rising to £9.99 later, but anyone who has already bought is locked in at the lower price). You cannot redistribute SEAHORSE or its source. We provide it "as is", with the legal protections required by UK consumer law. The licence-key, pricing, and refund terms below take effect when Seahorse moves from early access to public launch; during early access it is free and fully local. The full terms below set this out in detail.</p>
+    </div>
+</div>
+
+<main class="policy">
+<div class="container">
+
+<h2>1. About these terms</h2>
+<p>These Terms &amp; Licence (the "Agreement") govern your use of the SEAHORSE desktop application, the seahorseapp.co.uk website, and any related services (together, "Seahorse"), provided by <strong>Ironbridge Games LTD</strong> (Company No. 16882669), a company registered in England and Wales with its registered office at 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ ("Ironbridge", "we", "us", "our").</p>
+<p>By installing or using Seahorse, or by signing up on our website, you ("the User", "you") agree to be bound by this Agreement.</p>
+
+<h2>2. Licence grant</h2>
+
+<h3>2.1 Personal, non-exclusive licence</h3>
+<p>Subject to your compliance with this Agreement and the receipt of a valid licence key (or membership of the first-50 free tier described below), Ironbridge grants you a personal, non-exclusive, non-transferable, non-sublicensable licence to install and use Seahorse for your own personal or internal business use on devices you own or control.</p>
+
+<h3>2.2 The first 50 free-for-life tier</h3>
+<p>The first 50 individuals to sign up on the seahorseapp.co.uk early-access list receive a free-for-life licence as a thank-you for helping during the teething (early-access) period. This licence is permanent, includes all future updates, and never converts to a paid tier provided this Agreement is observed.</p>
+
+<h3>2.3 The £4.99 one-off licence (rising to £9.99)</h3>
+<p>Everyone after the first 50 sign-ups must purchase a paid licence to continue using Seahorse beyond the teething period. The launch price is <strong>£4.99 one-off</strong>. Ironbridge reserves the right to raise the price for new buyers in the future (currently planned at £9.99), but any User who has paid before a price rise retains their existing licence permanently at the lower price. Licences include all future updates at no extra cost.</p>
+
+<h3>2.4 Device cap</h3>
+<p>A single licence may be activated on up to five (5) devices belonging to the licensed User. If you need to move your licence between devices beyond that limit, contact <a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a> and we will reset your activations.</p>
+
+<h3>2.5 What this licence does not include</h3>
+<ul>
+    <li>The right to redistribute, resell, sublicense, or share Seahorse with others.</li>
+    <li>The right to reverse-engineer, decompile, or disassemble Seahorse, except to the extent permitted by applicable law (in the UK, principally section 50B of the Copyright, Designs and Patents Act 1988).</li>
+    <li>The right to use Seahorse to build a competing product.</li>
+    <li>Any rights in the SEAHORSE name, logo, branding, or trade dress.</li>
+</ul>
+
+<h2>3. Teething (early-access) period</h2>
+<p>During the teething period, Seahorse is provided free of charge to anyone who downloads it. This period is intended for bug-finding and feature shaping. When teething ends, the licence key system described in Section 2 takes effect. Ironbridge will notify everyone on the signup list at least 14 days before teething ends.</p>
+
+<h2>4. Refunds</h2>
+<p>Because Seahorse is a digital product delivered immediately upon purchase, your UK statutory right to cancel under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013 is normally lost once the licence key is delivered.</p>
+<p>However, we offer a <strong>14-day refund</strong> at our discretion if Seahorse does not work for you. Email <a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a> within 14 days of purchase, explain briefly why, and we will refund you and revoke the key. After 14 days, refunds are at Ironbridge's sole discretion. Lemon Squeezy (the merchant of record) processes the refund.</p>
+
+<h2>5. Updates and changes to Seahorse</h2>
+<p>Ironbridge may update Seahorse at any time to add features, fix bugs, or improve security. Updates are free for the lifetime of your licence. We may also retire features that are no longer viable. Where a retirement materially reduces what your licence covers, we will explain why in the relevant CHANGELOG entry and via email.</p>
+
+<h2>6. Your responsibilities</h2>
+<p>You agree to:</p>
+<ul>
+    <li>Use Seahorse lawfully and in accordance with this Agreement.</li>
+    <li>Keep your licence key confidential and not share it with others.</li>
+    <li>Not use Seahorse to break the terms of any third-party service you connect to it (Slack, Notion, Atlassian, Google, Microsoft, etc.). You remain bound by those services' terms when you use them through Seahorse.</li>
+    <li>Not attempt to circumvent the licence-key system, the activation cap, or any technical protections in Seahorse.</li>
+</ul>
+
+<h2>7. Data and privacy</h2>
+<p>Seahorse is designed to keep your data on your computer. Our handling of any personal data we do touch (your email, your licence key, optional anonymous telemetry) is described in our <a href="privacy.html">Privacy Policy</a>. By using Seahorse you confirm you have read that policy.</p>
+
+<h2>8. Disclaimers</h2>
+<p>Seahorse is provided <strong>"as is" and "as available"</strong>. To the maximum extent permitted by law, Ironbridge disclaims all warranties, whether express or implied, including any implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+<p>Seahorse uses artificial intelligence to assist you. <strong>AI output may be inaccurate, incomplete, or otherwise unsuitable for any specific purpose.</strong> You are solely responsible for verifying any output before acting on it. Do not rely on Seahorse as a substitute for professional advice (legal, medical, financial, or otherwise).</p>
+<p>Nothing in this Agreement excludes or limits any rights you have as a consumer that cannot be excluded under UK law (including the Consumer Rights Act 2015), nor any liability for death, personal injury caused by negligence, or fraud.</p>
+
+<h2>9. Limitation of liability</h2>
+<p>To the maximum extent permitted by law, Ironbridge's total aggregate liability to you for any claim arising out of or relating to this Agreement or your use of Seahorse, whether in contract, tort (including negligence), or otherwise, is limited to the amount you actually paid for your Seahorse licence in the twelve (12) months preceding the claim, or £20.00, whichever is greater.</p>
+<p>In no event shall Ironbridge be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to lost profits, lost data, or business interruption, even if Ironbridge has been advised of the possibility of such damages. This limitation applies notwithstanding the failure of any limited remedy of its essential purpose.</p>
+
+<h2>10. Termination</h2>
+<p>This Agreement remains in force until terminated.</p>
+<p>You may terminate at any time by uninstalling Seahorse and deleting any local data. Termination by you does not entitle you to a refund except as set out in Section 4.</p>
+<p>Ironbridge may suspend or terminate your licence if you materially breach this Agreement (for example by attempting to redistribute Seahorse or circumvent the licence-key system). Where the breach is capable of cure, we will give you reasonable notice before suspension.</p>
+<p>On termination, your right to use Seahorse ends. Sections 7, 8, 9, 11, 12, and 13 survive termination.</p>
+
+<h2>11. Changes to this Agreement</h2>
+<p>We may update this Agreement from time to time. Where changes are material, we will email everyone with a licence at least 30 days before they take effect, and update the "last updated" date at the top of this page. If you do not agree with a material change, your remedy is to stop using Seahorse; we will, on request, refund any unused portion of a paid licence on a pro-rata basis.</p>
+
+<h2>12. Governing law and jurisdiction</h2>
+<p>This Agreement is governed by the laws of England and Wales. The courts of England and Wales have exclusive jurisdiction over any dispute arising out of this Agreement, save that nothing in this clause limits your right (if you are a consumer) to bring proceedings in your country of residence under applicable consumer law.</p>
+
+<h2>13. General</h2>
+<ul>
+    <li><strong>Entire agreement.</strong> This Agreement, together with the Privacy Policy, is the entire agreement between you and Ironbridge regarding Seahorse, and supersedes any prior agreements on the same subject.</li>
+    <li><strong>Severability.</strong> If any part of this Agreement is held unenforceable, the rest remains in force.</li>
+    <li><strong>No waiver.</strong> Failure by us to enforce any right is not a waiver of that right.</li>
+    <li><strong>Assignment.</strong> You may not assign this Agreement. We may assign it to a successor in connection with a merger, acquisition, or sale of substantially all our assets.</li>
+    <li><strong>Notices.</strong> Notices to Ironbridge should be sent to <a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a>.</li>
+</ul>
+
+<h2>14. Contact</h2>
+<p><strong>Henry Kelly</strong><br>
+Ironbridge Games LTD<br>
+2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ, United Kingdom<br>
+<a href="mailto:henry@seahorseapp.co.uk">henry@seahorseapp.co.uk</a></p>
+
+</div>
+</main>
+
+<footer>
+    <div class="footer-row">
+        <div class="footer-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></div>
+        <div class="footer-links">
+            <a href="index.html#what">What it does</a>
+            <a href="index.html#proof">Proof</a>
+            <a href="index.html#status">Status</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="mailto:henry@seahorseapp.co.uk">Contact</a>
+        </div>
+    </div>
+    <div class="footer-legal">
+        © 2026 <strong>Ironbridge Games LTD</strong> · Company No. 16882669 · 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ<br>
+        Built with care in Kent
+    </div>
+</footer>
+
+</body>
+</html>

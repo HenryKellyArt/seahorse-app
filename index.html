@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SEAHORSE: a personal AI agent for neurodivergent brains. Built BY a neurodivergent brain. It does the homework you couldn't.">
+<meta name="theme-color" content="#0A2540">
+<meta property="og:title" content="SEAHORSE: your external hippocampus">
+<meta property="og:description" content="A personal AI agent for neurodivergent brains. It does the homework you couldn't.">
+<meta property="og:image" content="https://seahorseapp.co.uk/assets/seahorse_appicon.png">
+<meta property="og:url" content="https://seahorseapp.co.uk">
+<meta name="twitter:card" content="summary_large_image">
+<title>SEAHORSE: your external hippocampus</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+:root {
+    --navy: #0A2540; --navy-deep: #050F1F; --navy-soft: #14304D;
+    --cream: #F2F4F7; --cream-warm: #F6F8FA;
+    --white: #FFF; --teal: #4A8B8E; --teal-soft: #B8D4D6;
+    --rose: #C97970; --amber: #D69E2E;
+    --text: #1A2B3D; --text-soft: #5A6B7E; --text-mute: #8B9AAE;
+    --line: rgba(10,37,64,0.12); --line-soft: rgba(10,37,64,0.06);
+    --container: 1080px; --narrow: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.6; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: var(--narrow); margin: 0 auto; padding: 0 24px; }
+
+/* PILL NAV */
+.pill-nav { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: rgba(10,37,64,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 100px; padding: 8px 10px 8px 24px; display: flex; align-items: center; gap: 8px; z-index: 100; box-shadow: 0 20px 56px rgba(10,37,64,0.28), 0 3px 8px rgba(10,37,64,0.12); border: 1px solid rgba(255,255,255,0.08); }
+.pill-brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: 0.5px; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 6px; }
+.pill-brand img { width: 26px; height: 26px; }
+.pill-links { display: flex; gap: 2px; list-style: none; }
+.pill-links a { color: rgba(242,244,247,0.7); text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 17px; border-radius: 100px; transition: all .15s; }
+.pill-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.pill-cta { background: var(--white); color: var(--navy) !important; padding: 10px 19px !important; border-radius: 100px; font-weight: 700 !important; font-size: 14px !important; margin-left: 6px; }
+.pill-cta:hover { background: var(--cream) !important; transform: scale(1.02); }
+@media (max-width: 720px) { .pill-nav { padding: 8px 14px; top: 12px; } .pill-links li:not(.cta) { display: none; } .pill-brand { padding-right: 12px; margin-right: 0; } }
+
+/* HERO */
+.hero { padding: 160px 0 100px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(74,139,142,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-inner { position: relative; z-index: 1; }
+.eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 6px 14px; background: rgba(74,139,142,0.1); border: 1px solid rgba(74,139,142,0.2); border-radius: 100px; margin-bottom: 28px; }
+.hero-logo { width: 140px; height: 140px; margin: 0 auto 36px; background: var(--navy); border-radius: 32px; padding: 18px; box-shadow: 0 30px 80px rgba(10,37,64,0.2), 0 8px 24px rgba(10,37,64,0.12); }
+.hero-logo img { width: 100%; height: 100%; }
+h1 { font-size: 68px; font-weight: 800; letter-spacing: -2px; line-height: 1.0; color: var(--navy); max-width: 800px; margin: 0 auto 24px; }
+h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.hero-sub { font-size: 20px; line-height: 1.55; color: var(--text-soft); max-width: 660px; margin: 0 auto 40px; }
+.hero-sub strong { color: var(--navy); font-weight: 600; }
+.cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 15px 28px; border-radius: 100px; font-weight: 600; font-size: 15px; text-decoration: none; transition: all .15s; border: none; cursor: pointer; font-family: inherit; }
+.btn-primary { background: var(--navy); color: var(--white); box-shadow: 0 10px 28px rgba(10,37,64,0.2); }
+.btn-primary:hover { background: var(--navy-deep); transform: translateY(-2px); }
+.btn-secondary { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+.btn-secondary:hover { background: var(--navy); color: var(--white); }
+.hero-note { margin-top: 24px; font-size: 13px; color: var(--text-mute); }
+@media (max-width: 720px) { h1 { font-size: 42px; letter-spacing: -1.2px; } .hero { padding: 110px 0 70px; } .hero-sub { font-size: 18px; } }
+
+/* SECTIONS */
+section { padding: 90px 0; }
+.section-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; text-align: center; }
+h2 { font-size: 42px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; color: var(--navy); margin-bottom: 18px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
+h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.lede { font-size: 18px; line-height: 1.6; color: var(--text-soft); max-width: 640px; margin: 0 auto 56px; text-align: center; }
+.lede strong { color: var(--navy); font-weight: 600; }
+@media (max-width: 720px) { section { padding: 70px 0; } h2 { font-size: 30px; } .lede { font-size: 16px; margin-bottom: 40px; } }
+
+/* PILLARS */
+.pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.pillar { background: var(--white); border-radius: 20px; padding: 28px 20px; border: 1px solid var(--line-soft); transition: all .2s; text-align: left; }
+.pillar:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(10,37,64,0.08); }
+.pillar-num { font-family: 'Lora', serif; font-style: italic; font-size: 20px; color: var(--teal); margin-bottom: 12px; }
+.pillar h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.3px; }
+.pillar p { font-size: 13.5px; line-height: 1.6; color: var(--text-soft); }
+@media (max-width: 1100px) { .pillars-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 720px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+/* STORY */
+.story { background: var(--cream-warm); }
+.story h2 { text-align: left; max-width: 100%; }
+.story .section-eyebrow { text-align: left; }
+.story-inner { max-width: 640px; margin: 0 auto; }
+.story-aside-inline { display: flex; align-items: center; gap: 20px; margin-bottom: 36px; }
+.story-portrait-sm { width: 90px; height: 90px; background: var(--navy); border-radius: 50%; padding: 14px; flex-shrink: 0; }
+.story-portrait-sm img { width: 100%; height: 100%; }
+.story-byline { font-size: 15px; color: var(--text-soft); }
+.story-byline strong { display: block; color: var(--navy); font-size: 17px; margin-bottom: 4px; }
+.story-body p { margin-bottom: 18px; font-size: 17px; line-height: 1.7; }
+.story-body p.pull { font-family: 'Lora', serif; font-style: italic; font-size: 24px; line-height: 1.4; color: var(--navy); text-align: center; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 30px 0; }
+
+/* HOW */
+.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.how-card { padding: 32px 26px; border-radius: 20px; background: var(--white); border: 1px solid var(--line-soft); }
+.how-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 4px 10px; background: rgba(74,139,142,0.08); border-radius: 100px; margin-bottom: 16px; }
+.how-card h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.how-card p { font-size: 14px; line-height: 1.6; color: var(--text-soft); margin-bottom: 14px; }
+.how-example { font-family: 'Lora', serif; font-style: italic; font-size: 14px; color: var(--navy); padding: 14px 16px; background: var(--cream); border-radius: 12px; border: 1px solid var(--line-soft); }
+@media (max-width: 920px) { .how-grid { grid-template-columns: 1fr; } }
+
+/* PROOF (new section) */
+.proof { background: var(--white); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+.proof-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.proof-item { background: var(--cream-warm); padding: 30px 28px; border-radius: 18px; border: 1px solid var(--line-soft); }
+.proof-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 4px 10px; background: rgba(74,139,142,0.1); border-radius: 100px; margin-bottom: 16px; }
+.proof-item h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.3px; }
+.proof-item p { font-size: 15px; line-height: 1.6; color: var(--text-soft); margin-bottom: 12px; }
+.proof-item p strong { color: var(--navy); font-weight: 600; }
+.proof-evidence { font-family: 'Lora', serif; font-style: italic; font-size: 14px; color: var(--navy); padding: 14px 16px; background: var(--white); border-radius: 10px; border-left: 3px solid var(--teal); margin-top: 14px; }
+@media (max-width: 720px) { .proof-grid { grid-template-columns: 1fr; } }
+
+/* DIFFERENT */
+.different { background: var(--navy); color: var(--cream); }
+.different .section-eyebrow { color: rgba(255,255,255,0.6); }
+.different h2 { color: var(--white); }
+.different .lede { color: rgba(242,244,247,0.7); }
+.diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.diff-item { padding: 30px 26px; background: rgba(255,255,255,0.04); border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); }
+.diff-item h3 { font-size: 21px; font-weight: 700; color: var(--white); margin-bottom: 12px; letter-spacing: -0.3px; }
+.diff-item p { font-size: 14px; line-height: 1.65; color: rgba(242,244,247,0.75); margin-bottom: 10px; }
+.diff-item p:last-child { margin-bottom: 0; }
+.diff-item strong { color: var(--white); font-weight: 600; }
+.style-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.style-chip { font-size: 11px; font-weight: 600; padding: 4px 11px; background: rgba(255,255,255,0.08); color: var(--white); border-radius: 100px; letter-spacing: 0.3px; }
+.style-chip.active { background: var(--teal); color: var(--navy); }
+@media (max-width: 720px) { .diff-grid { grid-template-columns: 1fr; } }
+
+/* PRIVACY */
+.privacy { background: var(--cream); }
+.privacy-grid { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 760px; margin: 0 auto; }
+.privacy-item { background: var(--white); padding: 26px 30px; border-radius: 16px; border: 1px solid var(--line-soft); }
+.privacy-item h3 { font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; letter-spacing: -0.3px; }
+.privacy-item h3::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.privacy-item p { font-size: 14px; line-height: 1.6; color: var(--text-soft); margin-bottom: 10px; }
+.privacy-item p:last-child { margin-bottom: 0; }
+.privacy-item strong { color: var(--navy); font-weight: 600; }
+.privacy-item code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--cream); padding: 2px 8px; border-radius: 4px; color: var(--navy); border: 1px solid var(--line-soft); }
+
+/* STATUS */
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.status-card { background: var(--white); border-radius: 20px; padding: 32px; border: 1px solid var(--line-soft); }
+.status-card h3 { font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 4px; display: flex; align-items: center; gap: 10px; letter-spacing: -0.3px; }
+.status-card h3 .dot { width: 9px; height: 9px; border-radius: 50%; }
+.status-card h3 .dot.live { background: #2ECC71; box-shadow: 0 0 12px rgba(46,204,113,0.4); }
+.status-card h3 .dot.building { background: #F39C12; box-shadow: 0 0 12px rgba(243,156,18,0.4); }
+.status-card .sub { font-size: 12px; color: var(--text-mute); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.status-card ul { list-style: none; }
+.status-card li { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; line-height: 1.55; display: flex; gap: 10px; }
+.status-card li:last-child { border-bottom: none; }
+.status-card li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); margin-top: 8px; flex-shrink: 0; }
+.status-card li strong { color: var(--navy); font-weight: 600; }
+@media (max-width: 720px) { .status-grid { grid-template-columns: 1fr; } }
+
+/* KICKSTARTER */
+.ks { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); position: relative; }
+.ks .section-eyebrow { color: var(--teal-soft); }
+.ks h2 { color: var(--white); }
+.ks-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.ks-lede { font-size: 19px; line-height: 1.55; color: rgba(242,244,247,0.85); margin-bottom: 40px; }
+.ks-lede strong { color: var(--white); }
+.ks-stretches { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 26px 30px; text-align: left; margin-bottom: 36px; }
+.ks-stretches h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal-soft); margin-bottom: 14px; }
+.ks-stretches h4:not(:first-child) { margin-top: 24px; }
+.ks-stretches ul { list-style: none; }
+.ks-stretches li { padding: 7px 0; color: rgba(242,244,247,0.85); font-size: 14px; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+.ks-stretches li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); margin-top: 9px; flex-shrink: 0; }
+.ks-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.ks-cta-row .btn-primary { background: var(--white); color: var(--navy); }
+.ks-cta-row .btn-primary:hover { background: var(--cream); }
+.ks-cta-row .btn-secondary { color: var(--white); border-color: rgba(255,255,255,0.3); }
+.ks-cta-row .btn-secondary:hover { background: var(--white); color: var(--navy); }
+.ks-footnote { font-size: 13px; color: rgba(242,244,247,0.55); font-style: italic; }
+
+/* SIGNUP */
+.signup { background: var(--cream-warm); text-align: center; }
+.signup-form { display: flex; gap: 10px; max-width: 460px; margin: 0 auto; }
+.signup-form input { flex: 1; padding: 15px 18px; border: 1px solid var(--line); border-radius: 100px; background: var(--white); color: var(--navy); font-family: inherit; font-size: 15px; }
+.signup-form input:focus { outline: none; border-color: var(--teal); }
+.signup-form button { background: var(--navy); color: var(--white); padding: 15px 24px; border: none; border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; transition: all .15s; }
+.signup-form button:hover { background: var(--navy-deep); transform: translateY(-1px); }
+.signup-note { margin-top: 18px; font-size: 12px; color: var(--text-mute); text-align: center; }
+.signup-success { display: none; background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.3); padding: 16px; border-radius: 14px; color: var(--navy); margin: 12px auto 0; max-width: 460px; font-weight: 500; }
+.signup-success.show { display: block; }
+@media (max-width: 600px) { .signup-form { flex-direction: column; } }
+
+/* FOOTER */
+footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-top: 1px solid var(--line-soft); background: var(--cream-warm); }
+.footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; color: var(--navy); font-weight: 700; font-size: 16px; }
+.footer-brand img { width: 24px; height: 24px; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--text-mute); text-decoration: none; font-size: 13px; }
+.footer-links a:hover { color: var(--navy); }
+.footer-legal { width: 100%; padding-top: 24px; margin-top: 24px; border-top: 1px solid var(--line-soft); text-align: center; color: var(--text-mute); font-size: 12px; line-height: 1.6; }
+.footer-legal strong { color: var(--text-soft); }
+</style>
+</head>
+<body>
+
+<nav class="pill-nav">
+    <a href="#" class="pill-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></a>
+    <ul class="pill-links">
+        <li><a href="#what">What it does</a></li>
+        <li><a href="#proof">Proof</a></li>
+        <li><a href="#story">Story</a></li>
+        <li><a href="#status">Status</a></li>
+        <li class="cta"><a href="#ks" class="pill-cta">Support</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="container hero-inner">
+        <span class="eyebrow">A personal AI agent, built BY a neurodivergent brain</span>
+        <div class="hero-logo"><img src="assets/seahorse_logo.png" alt="SEAHORSE"></div>
+        <h1>Your <em>external</em> hippocampus.</h1>
+        <p class="hero-sub">
+            SEAHORSE watches your work life, sweeps for what slipped through, and prompts you when something needs you. <strong>Most AI waits to be asked. SEAHORSE comes to you first.</strong> It does the homework you couldn't.
+        </p>
+        <div class="cta-row">
+            <a href="#ks" class="btn btn-primary">Support the Kickstarter</a>
+            <a href="#what" class="btn btn-secondary">See what it does</a>
+        </div>
+        <p class="hero-note">Engineered around ADHD and Autism brains. Runs on your machine. Free during early access, £4.99 one-off at launch, no subscription.</p>
+    </div>
+</header>
+
+<!-- FOUR PILLARS -->
+<section id="what">
+    <div class="container">
+        <p class="section-eyebrow">What SEAHORSE actually does</p>
+        <h2>Seven jobs your brain shouldn't have to do <em>alone</em>.</h2>
+        <p class="lede">ND brains are brilliant at the big stuff: pattern recognition, deep focus, lateral thinking. The routing layer (what matters, when to reply, who to interrupt, what got lost in the noise) is what burns us out. <strong>SEAHORSE is the routing layer.</strong> So you can stop being it.</p>
+        <div class="pillars-grid">
+            <div class="pillar">
+                <div class="pillar-num">i.</div>
+                <h3>Curate</h3>
+                <p>Builds your roster. Every person, project, place that matters in your work life. Roles, preferences, current threads. Cross-referenced so when one name comes up, the whole story arrives with it.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">ii.</div>
+                <h3>Notice</h3>
+                <p>Sweeps the noise. SEAHORSE hunts through your tools for what slipped through. Threads that died. DMs from people who matter. Things lost between channels on a busy day.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">iii.</div>
+                <h3>Nudge</h3>
+                <p>Prompts YOU first. The inversion. Most AI waits to be asked. SEAHORSE comes to you. "Sam's been waiting on you since Monday." You don't remember to ask. SEAHORSE remembers for you.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">iv.</div>
+                <h3>Answer</h3>
+                <p>Does the homework. When someone messages you, SEAHORSE has already pulled the project, the person, the thread, the prior decision. No more "let me check and get back to you."</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">v.</div>
+                <h3>Context</h3>
+                <p>Holds the thread. Ask "what is this?" about any project, person, or topic. SEAHORSE pulls every related thread, email, doc, message, and meeting it has seen, sorted by source. You get the whole picture in one place.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">vi.</div>
+                <h3>Judgement</h3>
+                <p>Has an opinion. SEAHORSE doesn't just summarise, it tells you what actually matters and what doesn't. "Not your lane." "Worth a private check-in." "If you do one thing tonight." Summary plus opinion, never summary alone.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">vii.</div>
+                <h3>Recall</h3>
+                <p>Pulls your memory when yours fails. The thing you knew yesterday and can't access right now is here, indexed across every email, message, doc, and meeting SEAHORSE has seen. Your brain went blank. SEAHORSE did not.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROOF (new) -->
+<section class="proof" id="proof">
+    <div class="container">
+        <p class="section-eyebrow">Real shipped capabilities</p>
+        <h2>This isn't a roadmap. It's <em>shipped</em>.</h2>
+        <p class="lede">"Built FOR you" is what every other AI assistant says while shipping vapourware. Here are four capabilities running in the daily-driver build today.</p>
+        <div class="proof-grid">
+            <div class="proof-item">
+                <span class="proof-tag">Memory enrichment</span>
+                <h3>Look at someone on Slack, update their card.</h3>
+                <p>Tell SEAHORSE "look at Sam on Slack and update their memory card." SEAHORSE fetches their entire Slack history, pulls out their role, their topics, their style, writes it all back to their card. <strong>Verified 14 May 2026:</strong> enriched a real teammate's card from 27 actual Slack messages. Around 50 seconds end to end on a home machine.</p>
+                <div class="proof-evidence">"Henry: look at Matt on Slack and update his card. SEAHORSE: done. Pulled 27 messages, identified him as Matt (Sully), found 3 active topic threads, locked the updates to his card."</div>
+            </div>
+            <div class="proof-item">
+                <span class="proof-tag">Open Loops dock</span>
+                <h3>A visible panel of what SEAHORSE is tracking.</h3>
+                <p>Right-side floating dock shows every thing SEAHORSE is holding for you. <strong>Colour-coded by priority</strong> (red = urgent, amber = active, blue = FYI). Click ✓ to acknowledge each item. Email pulse pushes new threads here automatically. <strong>You SEE what's being tracked. Not a black box.</strong></p>
+                <div class="proof-evidence">"3 open loops: pri-1 unanswered DM from Sam (24h), pri-2 email about Q3 launch needs a reply (6h), pri-3 calendar event about reschedule pending confirmation."</div>
+            </div>
+            <div class="proof-item">
+                <span class="proof-tag">Semantic understanding</span>
+                <h3>Knows what you mean, not just what you typed.</h3>
+                <p>SEAHORSE understands intent through real semantic matching, not brittle keyword lists. Phrase it any way you want: "remind me to call mum at 4pm" / "set a reminder for mum, four o'clock" / "ping me about mum later this afternoon" all route the same way. <strong>Plus it knows your specific vocabulary:</strong> CC 2.0, AIRLOCK, Pacifica, the team lead, my partner. Your words become first-class.</p>
+                <div class="proof-evidence">"Henry says 'PT' → SEAHORSE knows that means Helix Playtest. Henry says 'the playtest' → same entity. Same memory card, every time."</div>
+            </div>
+            <div class="proof-item">
+                <span class="proof-tag">Cross-turn memory</span>
+                <h3>Remembers what you just talked about.</h3>
+                <p>You: "Got a meeting today?" SEAHORSE: "Yes, 14:00 with the design team about Q3." You: "What's the agenda?" <strong>SEAHORSE knows you mean THAT meeting</strong>, not a fabricated one. Most LLM products lose context the moment they answer. SEAHORSE holds a rolling memory of the last several turns so "it / that / the thing" actually resolves to the real entity.</p>
+                <div class="proof-evidence">"Salience ring tracks the last 12 entities mentioned with a 30-minute expiry. Follow-up references pull from there before fabricating."</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+    <div class="container">
+        <div class="story-inner">
+            <p class="section-eyebrow">The founder story</p>
+            <h2>I built this because I almost <em>quit</em> my job.</h2>
+            <div class="story-aside-inline">
+                <div class="story-portrait-sm"><img src="assets/seahorse_logo.png" alt="SEAHORSE"></div>
+                <div class="story-byline"><strong>Henry Kelly</strong>Founder, Ironbridge Games · Liverpool-born, Kent-based</div>
+            </div>
+            <div class="story-body">
+                <p>Hi, I'm Henry. I'm an ADHD/Autism brain in a games industry suit. For 14 years I've shipped games at studios you've probably heard of: Ubisoft, Gunzilla, Rebellion, nDreams.</p>
+                <p>The real version: I've lost two jobs because the routing layer of my brain gave way under pressure. Not because I couldn't do the work. Because I couldn't keep track of the work. Missed Slack messages. Dropped email threads. Forgotten meetings I swore I never saw. Anyone with ADHD or Autism knows the feeling.</p>
+                <p class="pull">On 11 May 2026, I almost <em>quit</em> my third one.</p>
+                <p>That night I started building what would become SEAHORSE. A personal AI agent that watches my work life, sweeps for what I'm dropping, and prompts me when something needs me. Named after the hippocampus, the part of your brain that stores and retrieves memory. Mine gets overwhelmed. SEAHORSE is the external one.</p>
+                <p>I'm building it FOR me first. Every feature exists because my brain needs it. The personality mirrors me. The nudges know my workday. Now I'm sharing it with every other neurodivergent person who's been silently drowning the same way I have.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+    <div class="container">
+        <p class="section-eyebrow">How SEAHORSE works</p>
+        <h2>Three places where your information <em>lives</em>.</h2>
+        <p class="lede">SEAHORSE is a desktop app that sits quietly on your computer. Voice in, voice out. <strong>Anything the UI can do, chat can do.</strong> The chat bar is the universal command line.</p>
+        <div class="how-grid">
+            <div class="how-card">
+                <span class="how-tag">i. Memory</span>
+                <h3>Your structured filing cabinet.</h3>
+                <p>Cards for people, projects, places, contracts. You curate them. SEAHORSE proposes new ones as it observes your work and asks if you want them saved.</p>
+                <div class="how-example">"Sam · Head of Operations · Prefers DMs · Tier 1 · Active topic: Q3 launch milestone."</div>
+            </div>
+            <div class="how-card">
+                <span class="how-tag">ii. Notes</span>
+                <h3>SEAHORSE's quiet journal.</h3>
+                <p>SEAHORSE writes these. You read them. If something's wrong, you tell SEAHORSE in chat and it fixes them. Honest observation, never trapped in mistakes.</p>
+                <div class="how-example">"You haven't replied to the team thread for 20 hours. Sam mentioned the launch is 18 days away in this afternoon's standup."</div>
+            </div>
+            <div class="how-card">
+                <span class="how-tag">iii. Pulse</span>
+                <h3>The background scanner.</h3>
+                <p>Every 10 minutes to an hour (your call), SEAHORSE checks your connected services. Pushes new important threads into the Open Loops dock for triage. No alarm bells.</p>
+                <div class="how-example">"3 new DMs · 2 important · 1 from a Tier 1 contact. Pushed to Open Loops."</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DIFFERENT -->
+<section class="different" id="different">
+    <div class="container">
+        <p class="section-eyebrow">What makes SEAHORSE different</p>
+        <h2>A personal AI agent, not a <em>corporate</em> one.</h2>
+        <p class="lede">Most AI products give every user the same personality. They record your voice. They store your data. They fabricate when they don't know. SEAHORSE flips every one of those.</p>
+        <div class="diff-grid">
+            <div class="diff-item">
+                <h3>It mirrors you.</h3>
+                <p>If you call SEAHORSE "brother", SEAHORSE calls you brother back. If you swear, SEAHORSE swears with you. Tell it never to call you "mate", it never does again, forever.</p>
+                <p><strong>You don't learn the AI's voice. SEAHORSE learns yours.</strong> Six built-in styles, plus full JARVIS-formal mode when you want "Greetings sir."</p>
+                <div class="style-chips">
+                    <span class="style-chip active">Default</span>
+                    <span class="style-chip">Sharper</span>
+                    <span class="style-chip">Warmer</span>
+                    <span class="style-chip">Focused</span>
+                    <span class="style-chip">Tired-buddy</span>
+                    <span class="style-chip">Pumped</span>
+                </div>
+            </div>
+            <div class="diff-item">
+                <h3>It's not Alexa.</h3>
+                <p>Your voice is <strong>never recorded</strong>. SEAHORSE listens via the AI, never via a human. No transcripts shipped to a contractor in some warehouse.</p>
+                <p>Voice exists for the moment it's spoken, then it's gone. Notes only, never recordings. In meetings SEAHORSE can take notes but no audio file ever lives on disk.</p>
+            </div>
+            <div class="diff-item">
+                <h3>It won't fabricate.</h3>
+                <p>If SEAHORSE doesn't know, it says so. <strong>It won't invent fake Slack quotes, made-up calendar events, or imaginary meeting attendees.</strong> When you ask "what's on my calendar?" and you didn't ask it to fetch Slack, it tells you it didn't fetch Slack.</p>
+                <p>Sounds basic, but most LLMs hallucinate confidently. SEAHORSE has anti-fabrication guards built into the prompt and the routing layer.</p>
+            </div>
+            <div class="diff-item">
+                <h3>It gives you opinions.</h3>
+                <p>Ask SEAHORSE "what do you think?" and you get an answer, not hedged mush. "I think X because Y. Move on it." Not "well, you could consider..." with no commitment.</p>
+                <p>The honesty floor is locked: SEAHORSE will tell you when something's a bad idea, even if you'd rather hear it's a good one. Especially then.</p>
+            </div>
+            <div class="diff-item">
+                <h3>Nothing without your approval.</h3>
+                <p>SEAHORSE won't send an email, post a reply, or schedule a meeting unless you explicitly say yes. You can grant full approval to act on your behalf, and <strong>you can retract it any time</strong>.</p>
+                <p>Default is always: ask first. The Open Loops dock shows every pending action so nothing happens behind your back.</p>
+            </div>
+            <div class="diff-item">
+                <h3>Your data stays with you.</h3>
+                <p>SEAHORSE runs on YOUR computer. Memory, notes, conversations, everything lives in a folder on YOUR machine. <strong>Ironbridge never sees your data.</strong> No central server. No "log in to SEAHORSE".</p>
+                <p>When the phone app lands, sync goes through your own Google Drive or OneDrive. Yours, full stop.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy">
+    <div class="container">
+        <p class="section-eyebrow">Privacy and trust</p>
+        <h2>Honest specifics, not corporate <em>platitudes</em>.</h2>
+        <p class="lede">"We respect your privacy" is what every other SaaS says while quietly hoovering up your data. Here's exactly what happens with yours.</p>
+        <div class="privacy-grid">
+            <div class="privacy-item">
+                <h3>Runs on your machine, powered by our own AI</h3>
+                <p>SEAHORSE runs on your machine using <strong>seahorsecore</strong>, our own proprietary AI built specifically for neurodivergent brains. No connection to OpenAI, Google, Meta, or any other big-tech model. Your conversations never leave your computer.</p>
+                <p>If you want extra horsepower for heavier tasks, you can opt in to cloud AI (Claude or OpenAI) using your own API keys. You pay those providers directly, Ironbridge never sees a penny or a byte of your data. When cloud AI is on, the relevant conversation context goes to that provider under <strong>their</strong> privacy policy, not ours. The default is cloud AI <strong>off</strong>.</p>
+            </div>
+            <div class="privacy-item">
+                <h3>Telemetry: opt-in, anonymous, one signal only</h3>
+                <p>Once a month, with your explicit permission, SEAHORSE sends a single piece of information: <code>installation 847294 was opened in May 2026, version 1.4.2</code>. No keystrokes. No content. No idea what you did. No personal identifiers.</p>
+                <p>If you stop using SEAHORSE, we'll send a friendly nudge asking what we could do better. That's the only reason we'd want to know. <strong>You can turn it off any time in Settings.</strong></p>
+            </div>
+            <div class="privacy-item">
+                <h3>Anti-clobber data protection</h3>
+                <p>SEAHORSE refuses to overwrite your memory cards if a write looks suspect. Empty data over non-empty data: refused. Drops >50% of your entries in one go: refused. Plus rotating startup backups of every state file (last 7 versions kept). <strong>Three layers of defence so an app crash or a sync race never eats your data.</strong></p>
+            </div>
+            <div class="privacy-item">
+                <h3>Free during early access. £4.99 at full launch.</h3>
+                <p>Seahorse is <strong>free while it's teething</strong> (the early-access period where bugs get found and rough edges get smoothed). When the app exits early access, it switches to a <strong>£4.99 one-off licence</strong>, rising to £9.99 once a real userbase exists. Early adopters lock in the lower price for good.</p>
+                <p><strong>No subscription. No premium tier. No ads. No paywall.</strong> One payment, every future update free, for life. <strong>No paid tier may ever gate ND-help functionality.</strong> If hosted extras land later (server space when a user outgrows local storage, or hosted GPU compute for features beyond home-machine capability), those are optional add-ons, never a wall in front of the core experience. Locked.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATUS -->
+<section id="status">
+    <div class="container">
+        <p class="section-eyebrow">Where SEAHORSE is right now</p>
+        <h2>In active development. Honest <em>progress</em> only.</h2>
+        <p class="lede">SEAHORSE is being built openly, day by day. Henry uses it every day. Here's exactly what's in the build right now and what's landing next.</p>
+        <div class="status-grid">
+            <div class="status-card">
+                <h3><span class="dot live"></span>Built and working</h3>
+                <p class="sub">In the daily-driver build · Updated 15 May 2026</p>
+                <ul>
+                    <li><strong>Our own AI lives on your machine.</strong> Seahorsecore v1, built and trained by us. Not OpenAI, not Google, not Meta. Just you and Seahorse.</li>
+                    <li><strong>The judgement layer.</strong> Seahorse forms opinions about what actually matters. "Not your lane" when it isn't. "If you do one thing tonight" when it is. Summary plus opinion, not summary alone.</li>
+                    <li><strong>The morning brief.</strong> Pulls overnight Slack, email, and calendar into one calm summary at the time you pick. Weekdays-only toggle. "Brief me now" button when you want it on demand.</li>
+                    <li><strong>An "On my mind" shelf</strong> that holds things gently and keeps reminding you in chat until you tick them off. One click to acknowledge each one.</li>
+                    <li><strong>Every nudge tells you where it came from</strong> and how fresh it is ("Slack · 23 min ago", "Calendar · 7h ago"). No black box.</li>
+                    <li><strong>Background scanning that respects you.</strong> Faster checks for email, slower for chat, your call. Quiet hours that actually stay quiet, but the urgent stuff still gets through.</li>
+                    <li><strong>A full activity log.</strong> See everything Seahorse has caught, when, from where. Nothing hidden.</li>
+                    <li><strong>One Slack? Three Slacks? All of them.</strong> Wire work, side-project, and personal accounts on the same tile. Same for Notion, Confluence, Jira.</li>
+                    <li><strong>A memory library</strong> of every person, project, and place that matters in your work life. Cross-referenced, so one name pulls the whole story.</li>
+                    <li><strong>Memory enrichment.</strong> Tell Seahorse "look at Sam on Slack and update her card", and it does. Pulls her real history, writes it into her card, done.</li>
+                    <li><strong>Follow-ups that resolve to the real thing.</strong> "What time?" knows you mean the meeting we just talked about, not a hallucination.</li>
+                    <li><strong>Knows what you mean, not just what you typed.</strong> Phrase it any way, Seahorse routes it the same.</li>
+                    <li><strong>Speaks your language.</strong> Project names, nicknames, your jargon. Your words become first-class.</li>
+                    <li><strong>Voice mode</strong> for hands-free use, with meeting, ambient, mute and "stand down" settings.</li>
+                    <li><strong>Six communication styles.</strong> Sharper when you need it. Warmer when you don't. Tired-buddy when you're knackered.</li>
+                    <li><strong>Tell it "don't call me dude" once.</strong> It never will again, forever.</li>
+                    <li><strong>It writes for you.</strong> Memory cards, notes, reminders, calendar events, and tasks, on its own when asked.</li>
+                    <li><strong>Everything lives on your computer.</strong> Ironbridge never sees your data.</li>
+                    <li><strong>Optional cloud horsepower.</strong> Bring your own Claude or OpenAI keys if you want it. Off by default.</li>
+                    <li><strong>Won't make things up.</strong> If Seahorse doesn't know, it says so. Anti-fabrication guards built in.</li>
+                    <li><strong>Your memory can't get silently wiped.</strong> Rotating backups plus refuse-to-overwrite logic.</li>
+                    <li><strong>Connections live:</strong> Linear, Slack, Zoho Mail, Notion, Jira.</li>
+                </ul>
+            </div>
+            <div class="status-card">
+                <h3><span class="dot building"></span>Currently building</h3>
+                <p class="sub">Landing over the next few months</p>
+                <ul>
+                    <li><strong>Seahorsecore v2.</strong> Our next AI brain, training right now. Bigger context, sharper judgement, warmer voice.</li>
+                    <li><strong>"What is this?" universal query.</strong> Paste a name, project, or topic. Seahorse pulls every thread, doc, message, and meeting it has touched, sorted by source.</li>
+                    <li><strong>Knows who's talking in meetings.</strong> Tell it "that was Sam" once, it adds her voice to her memory card. Next time it knows on its own.</li>
+                    <li><strong>Auto-handles reschedules.</strong> When a meeting gets moved in Slack chat, Seahorse updates your calendar for you and tells you straight: "I moved your 2pm to 3pm, here's the new invite." Undo with one click if it got it wrong.</li>
+                    <li><strong>Refine memory cards by talking.</strong> "Update Sam's card, she just got promoted" and it does.</li>
+                    <li>Email for Gmail, Outlook, iCloud, Proton, Fastmail, Yahoo (Zoho already live).</li>
+                    <li>Phone app, syncs via your own Google Drive or OneDrive.</li>
+                    <li>Memory export to a markdown folder you own.</li>
+                    <li>Memory import from Obsidian, Notion, Apple Notes.</li>
+                    <li><strong>Voice cloning.</strong> Seahorse currently speaks as Maisie, a calm child voice (yes, on purpose). Soon you'll be able to swap her for any voice you want.</li>
+                    <li>Quietly notices when you keep talking about the same person or thing and offers to make a memory card for it.</li>
+                    <li>30+ more integrations: Discord, Teams, WhatsApp, GitHub, Trello, Drive, more.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KICKSTARTER -->
+<section class="ks" id="ks">
+    <div class="container">
+        <div class="ks-inner">
+            <p class="section-eyebrow">Support SEAHORSE</p>
+            <h2>£4.99 one-off. <em>Backed</em> by people who give a damn.</h2>
+            <p class="ks-lede">
+                SEAHORSE costs £4.99 one-off at launch (rising to £9.99 later), with <strong>free lifetime updates</strong> and no subscription. The Kickstarter is for people who want to back the project beyond the price tag. <strong>The more support I raise, the deeper I can build.</strong> Bigger pledges mean more dev time, faster features, more integrations, better voice. You give what you can on top of the price. Early Kickstarter backers lock in the £4.99 price for good.
+            </p>
+            <div class="ks-stretches">
+                <h4>What more funding makes possible</h4>
+                <ul>
+                    <li>More dev time, full focus on SEAHORSE instead of split with the day job</li>
+                    <li>Voice cloning and more natural-sounding voices</li>
+                    <li>Phone app priority (currently scheduled after the Windows core stabilises)</li>
+                    <li>Faster local AI models so responses feel instant on average hardware</li>
+                    <li>More integrations, landing faster</li>
+                    <li>Speaker identification in meetings (real "who's talking" intelligence)</li>
+                    <li>Calendar-to-Slack reconciliation (auto-catch reschedules)</li>
+                </ul>
+                <h4>What it never funds</h4>
+                <ul>
+                    <li>Ads in the app, ever</li>
+                    <li>Subscriptions of any kind</li>
+                    <li>Paid tiers that gate core ND functionality</li>
+                    <li>Selling your data to anyone, for any reason</li>
+                </ul>
+            </div>
+            <div class="ks-cta-row">
+                <a href="#" class="btn btn-primary">Back on Kickstarter</a>
+                <a href="#" class="btn btn-secondary">Donate via PayPal</a>
+                <a href="#" class="btn btn-secondary">Buy me a coffee</a>
+            </div>
+            <p class="ks-footnote">Kickstarter and donation links go live when SEAHORSE's KS campaign launches. Drop your email below to know the moment it does.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SIGNUP -->
+<section class="signup" id="signup">
+    <div class="container">
+        <p class="section-eyebrow">Stay in the loop</p>
+        <h2>Be there when SEAHORSE <em>launches</em>.</h2>
+        <p class="lede">Drop your email and I'll send you a quiet note when SEAHORSE is ready to download, when the Kickstarter goes live, and when major features land. No spam. Unsubscribe in one click.</p>
+        <form class="signup-form" onsubmit="return handleSignup(event)">
+            <input type="email" name="email" placeholder="your@email.com" required>
+            <button type="submit">Notify me</button>
+        </form>
+        <div class="signup-success" id="signupSuccess">Thanks. You're on the list. I'll email when SEAHORSE is ready.</div>
+        <p class="signup-note">Your email goes to Zoho Campaigns. Used for SEAHORSE updates only. Nothing else, ever.</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-row">
+            <div class="footer-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></div>
+            <div class="footer-links">
+                <a href="#what">What it does</a>
+                <a href="#proof">Proof</a>
+                <a href="#story">Story</a>
+                <a href="#status">Status</a>
+                <a href="#ks">Support</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="https://theairlock.co.uk" target="_blank" rel="noopener">AIRLOCK (our game)</a>
+                <a href="https://ironbridgegames.co.uk" target="_blank" rel="noopener">Ironbridge Games</a>
+                <a href="mailto:henry@seahorseapp.co.uk">Contact</a>
+            </div>
+        </div>
+        <div class="footer-legal">
+            © 2026 <strong>Ironbridge Games LTD</strong> · Company No. 16882669 · 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ<br>
+            Free during early access · £4.99 one-off at launch with free lifetime updates · Built with care in Kent
+        </div>
+    </div>
+</footer>
+
+<script>
+function handleSignup(event) {
+    event.preventDefault();
+    const f = event.target;
+    console.log('Signup intent:', f.email.value);
+    f.style.display = 'none';
+    document.getElementById('signupSuccess').classList.add('show');
+    return false;
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 100, behavior: 'smooth' }); }
+    });
+});
+</script>
+
+</body>
+</html>
