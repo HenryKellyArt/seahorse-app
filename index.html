@@ -228,7 +228,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
             <a href="#ks" class="btn btn-primary">Support the Kickstarter</a>
             <a href="#what" class="btn btn-secondary">See what it does</a>
         </div>
-        <p class="hero-note">Engineered around ADHD and Autism brains. Runs on your machine. Free during early access, £4.99 one-off at launch, no subscription.</p>
+        <p class="hero-note">Engineered around ADHD and Autism brains. Runs on your machine. First 50 sign-ups free forever, then 30-day trial, then £4.99 one-off. No subscription.</p>
     </div>
 </header>
 
@@ -326,7 +326,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
             <div class="story-body">
                 <p>Hi, I'm Henry. I'm an ADHD/Autism brain in a games industry suit. For 14 years I've shipped games at studios you've probably heard of: Ubisoft, Gunzilla, Rebellion, nDreams.</p>
                 <p>The real version: I've lost two jobs because the routing layer of my brain gave way under pressure. Not because I couldn't do the work. Because I couldn't keep track of the work. Missed Slack messages. Dropped email threads. Forgotten meetings I swore I never saw. Anyone with ADHD or Autism knows the feeling.</p>
-                <p class="pull">On 11 May 2026, I was so stressed out with work and losing so many tasks, I <em>wanted</em> to quit.</p>
+                <p class="pull">In 2026, I was so stressed out with work and losing so many tasks because of tunnel vision and chaotic stress, I <em>wanted</em> to quit.</p>
                 <p>That night I started building what would become SEAHORSE. A personal AI agent that watches my work life, sweeps for what I'm dropping, and prompts me when something needs me. Named after the hippocampus, the part of your brain that stores and retrieves memory. Mine gets overwhelmed. SEAHORSE is the external one.</p>
                 <p>I'm building it FOR me first. Every feature exists because my brain needs it. The personality mirrors me. The nudges know my workday. Now I'm sharing it with every other neurodivergent person who's been silently drowning the same way I have.</p>
             </div>
@@ -434,8 +434,8 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                 <p>SEAHORSE refuses to overwrite your memory cards if a write looks suspect. Empty data over non-empty data: refused. Drops >50% of your entries in one go: refused. Plus rotating startup backups of every state file (last 7 versions kept). <strong>Three layers of defence so an app crash or a sync race never eats your data.</strong></p>
             </div>
             <div class="privacy-item">
-                <h3>Free during early access. £4.99 at full launch.</h3>
-                <p>Seahorse is <strong>free while it's teething</strong> (the early-access period where bugs get found and rough edges get smoothed). When the app exits early access, it switches to a <strong>£4.99 one-off licence</strong>, rising to £9.99 once a real userbase exists. Early adopters lock in the lower price for good.</p>
+                <h3>First 50 free. 30-day trial. £4.99 one-off.</h3>
+                <p>Three tiers, all friendly. The <strong>first 50 sign-ups</strong> get a permanent <strong>Lifetime</strong> licence, free forever, as a thank-you for helping shape Seahorse during early access. Everyone after starts on a <strong>30-day Trial</strong> with full functionality. After 30 days you can buy a <strong>Paid</strong> licence for <strong>£4.99 one-off</strong> (rising to £9.99 once a real userbase exists). Early adopters lock in the lower price for good.</p>
                 <p><strong>No subscription. No premium tier. No ads. No paywall.</strong> One payment, every future update free, for life. <strong>No paid tier may ever gate ND-help functionality.</strong> If hosted extras land later (server space when a user outgrows local storage, or hosted GPU compute for features beyond home-machine capability), those are optional add-ons, never a wall in front of the core experience. Locked.</p>
             </div>
         </div>
@@ -506,7 +506,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
             <p class="section-eyebrow">Support SEAHORSE</p>
             <h2>£4.99 one-off. <em>Backed</em> by people who give a damn.</h2>
             <p class="ks-lede">
-                SEAHORSE costs £4.99 one-off at launch (rising to £9.99 later), with <strong>free lifetime updates</strong> and no subscription. The Kickstarter is for people who want to back the project beyond the price tag. <strong>The more support I raise, the deeper I can build.</strong> Bigger pledges mean more dev time, faster features, more integrations, better voice. You give what you can on top of the price. Early Kickstarter backers lock in the £4.99 price for good.
+                SEAHORSE is free for the first 50 sign-ups (Lifetime tier), then 30 days free for everyone else (Trial tier), then <strong>£4.99 one-off</strong> (rising to £9.99 later), with <strong>free lifetime updates</strong> and no subscription. The Kickstarter is for people who want to back the project beyond the price tag. <strong>The more support I raise, the deeper I can build.</strong> Bigger pledges mean more dev time, faster features, more integrations, better voice. You give what you can on top of the price. Early Kickstarter backers lock in the £4.99 price for good.
             </p>
             <div class="ks-stretches">
                 <h4>What more funding makes possible</h4>
@@ -572,7 +572,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
         </div>
         <div class="footer-legal">
             © 2026 <strong>Ironbridge Games LTD</strong> · Company No. 16882669 · 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ<br>
-            Free during early access · £4.99 one-off at launch with free lifetime updates · Built with care in Kent
+            First 50 free forever · 30-day trial after · £4.99 one-off, free lifetime updates · Built with care in Kent
         </div>
     </div>
 </footer>
@@ -584,15 +584,4 @@ function handleSignup(event) {
     console.log('Signup intent:', f.email.value);
     f.style.display = 'none';
     document.getElementById('signupSuccess').classList.add('show');
-    return false;
-}
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(e) {
-        const t = document.querySelector(this.getAttribute('href'));
-        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 100, behavior: 'smooth' }); }
-    });
-});
-</script>
-
-</body>
-</html>
+    re
