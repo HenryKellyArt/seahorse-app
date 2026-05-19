@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="SEAHORSE: a personal AI agent for neurodivergent brains. Built BY a neurodivergent brain. It does the homework you couldn't.">
-<meta name="theme-color" content="#0A2540">
+<meta name="theme-color" content="#6717cd">
 <meta property="og:title" content="SEAHORSE: your external hippocampus">
 <meta property="og:description" content="A personal AI agent for neurodivergent brains. It does the homework you couldn't.">
 <meta property="og:image" content="https://seahorseapp.co.uk/assets/seahorse_appicon.png">
@@ -18,14 +18,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
 <style>
 :root {
-    --navy: #0A2540; --navy-deep: #050F1F; --navy-soft: #14304D;
+    /* THEME: VIBRANT (default) — purple primary, soft sea-foam accent. ND-warm but not neon. */
+    --primary: #6717cd;
+    --primary-deep: #4a0fa0;
+    --secondary: #2871fa;
+    --accent: #7BCDD9;
+    --accent-soft: #A5D9E0;
+    --line: rgba(103,23,205,0.12); --line-soft: rgba(103,23,205,0.06);
+
+    /* Shared (theme-independent) */
     --cream: #F2F4F7; --cream-warm: #F6F8FA;
-    --white: #FFF; --teal: #4A8B8E; --teal-soft: #B8D4D6;
+    --white: #FFF;
     --rose: #C97970; --amber: #D69E2E;
     --text: #1A2B3D; --text-soft: #5A6B7E; --text-mute: #8B9AAE;
-    --line: rgba(10,37,64,0.12); --line-soft: rgba(10,37,64,0.06);
     --container: 1080px; --narrow: 760px;
+
+    /* Legacy variable name aliases (kept so existing CSS rules don't break).
+       --navy is now purple, --teal is now cyan. Names are misnomers; values are correct. */
+    --navy: var(--primary);
+    --navy-deep: var(--primary-deep);
+    --navy-soft: var(--secondary);
+    --teal: var(--accent);
+    --teal-soft: var(--accent-soft);
 }
+
+/* THEME: CALM (alternate) — blue primary, warm grey accent. Focus-mode quietude.
+   Activated by setting data-theme="calm" on <html>. JS toggle below stores preference in localStorage. */
+[data-theme="calm"] {
+    --primary: #2871fa;
+    --primary-deep: #1a4fc7;
+    --secondary: #6717cd;
+    --accent: #6B7280;
+    --accent-soft: #9CA3AF;
+    --line: rgba(40,113,250,0.12); --line-soft: rgba(40,113,250,0.06);
+}
+
+/* Theme toggle button styling — small pill that sits in the nav */
+.theme-toggle { background: rgba(255,255,255,0.06); color: rgba(242,244,247,0.85); border: 1px solid rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 100px; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: 0.3px; margin-left: 6px; transition: all .15s; }
+.theme-toggle:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+.theme-toggle::before { content: "Theme: "; opacity: 0.6; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.6; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; }
@@ -33,7 +64,7 @@ body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height
 .container-narrow { max-width: var(--narrow); margin: 0 auto; padding: 0 24px; }
 
 /* PILL NAV */
-.pill-nav { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: rgba(10,37,64,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 100px; padding: 8px 10px 8px 24px; display: flex; align-items: center; gap: 8px; z-index: 100; box-shadow: 0 20px 56px rgba(10,37,64,0.28), 0 3px 8px rgba(10,37,64,0.12); border: 1px solid rgba(255,255,255,0.08); }
+.pill-nav { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: rgba(103,23,205,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 100px; padding: 8px 10px 8px 24px; display: flex; align-items: center; gap: 8px; z-index: 100; box-shadow: 0 20px 56px rgba(103,23,205,0.28), 0 3px 8px rgba(103,23,205,0.12); border: 1px solid rgba(255,255,255,0.08); }
 .pill-brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: 0.5px; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 6px; }
 .pill-brand img { width: 26px; height: 26px; }
 .pill-links { display: flex; gap: 2px; list-style: none; }
@@ -45,18 +76,36 @@ body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height
 
 /* HERO */
 .hero { padding: 160px 0 100px; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(74,139,142,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero::before { content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(123,205,217,0.08) 0%, transparent 70%); pointer-events: none; }
 .hero-inner { position: relative; z-index: 1; }
-.eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 6px 14px; background: rgba(74,139,142,0.1); border: 1px solid rgba(74,139,142,0.2); border-radius: 100px; margin-bottom: 28px; }
-.hero-logo { width: 140px; height: 140px; margin: 0 auto 36px; background: var(--navy); border-radius: 32px; padding: 18px; box-shadow: 0 30px 80px rgba(10,37,64,0.2), 0 8px 24px rgba(10,37,64,0.12); }
-.hero-logo img { width: 100%; height: 100%; }
+.eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 6px 14px; background: rgba(123,205,217,0.1); border: 1px solid rgba(123,205,217,0.2); border-radius: 100px; margin-bottom: 28px; }
+/* Hero logo = TWO layers, Henry's art direction (2026-05-19):
+   - .hl-bg   = the icon background. STATIC. does not move.
+   - .hl-horse = the seahorse. BREATHES.
+   Both are Henry's pristine pre-Cowork originals (hero_bg.png /
+   hero_horse.png), shown with object-fit:contain so the FULL canvas
+   renders faithfully — CSS cannot crop or distort either layer. No
+   glow, no frame, no padding, no overflow clip. Nothing else. */
+.hero-logo { position: relative; width: 150px; height: 150px; margin: 0 auto 36px; }
+.hero-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+.hero-logo .hl-horse { animation: seahorseBreathe 4.4s ease-in-out infinite; transform-origin: center; will-change: transform; }
+@keyframes seahorseBreathe {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-logo .hl-horse { animation: none; }
+}
 h1 { font-size: 68px; font-weight: 800; letter-spacing: -2px; line-height: 1.0; color: var(--navy); max-width: 800px; margin: 0 auto 24px; }
 h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.acronym-line { font-size: 14px; line-height: 1.5; color: var(--text-soft); max-width: 600px; margin: 18px auto 32px; letter-spacing: 0.2px; }
+.acronym-line strong { color: var(--navy); font-weight: 700; letter-spacing: 1px; }
+.acronym-line em { font-family: 'Lora', serif; font-style: italic; color: var(--navy); }
 .hero-sub { font-size: 20px; line-height: 1.55; color: var(--text-soft); max-width: 660px; margin: 0 auto 40px; }
 .hero-sub strong { color: var(--navy); font-weight: 600; }
 .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .btn { display: inline-block; padding: 15px 28px; border-radius: 100px; font-weight: 600; font-size: 15px; text-decoration: none; transition: all .15s; border: none; cursor: pointer; font-family: inherit; }
-.btn-primary { background: var(--navy); color: var(--white); box-shadow: 0 10px 28px rgba(10,37,64,0.2); }
+.btn-primary { background: var(--navy); color: var(--white); box-shadow: 0 10px 28px rgba(103,23,205,0.2); }
 .btn-primary:hover { background: var(--navy-deep); transform: translateY(-2px); }
 .btn-secondary { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
 .btn-secondary:hover { background: var(--navy); color: var(--white); }
@@ -75,7 +124,7 @@ h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color:
 /* PILLARS */
 .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .pillar { background: var(--white); border-radius: 20px; padding: 28px 20px; border: 1px solid var(--line-soft); transition: all .2s; text-align: left; }
-.pillar:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(10,37,64,0.08); }
+.pillar:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(103,23,205,0.08); }
 .pillar-num { font-family: 'Lora', serif; font-style: italic; font-size: 20px; color: var(--teal); margin-bottom: 12px; }
 .pillar h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.3px; }
 .pillar p { font-size: 13.5px; line-height: 1.6; color: var(--text-soft); }
@@ -99,7 +148,7 @@ h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color:
 /* HOW */
 .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .how-card { padding: 32px 26px; border-radius: 20px; background: var(--white); border: 1px solid var(--line-soft); }
-.how-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 4px 10px; background: rgba(74,139,142,0.08); border-radius: 100px; margin-bottom: 16px; }
+.how-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 4px 10px; background: rgba(123,205,217,0.08); border-radius: 100px; margin-bottom: 16px; }
 .how-card h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
 .how-card p { font-size: 14px; line-height: 1.6; color: var(--text-soft); margin-bottom: 14px; }
 .how-example { font-family: 'Lora', serif; font-style: italic; font-size: 14px; color: var(--navy); padding: 14px 16px; background: var(--cream); border-radius: 12px; border: 1px solid var(--line-soft); }
@@ -109,7 +158,7 @@ h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color:
 .proof { background: var(--white); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
 .proof-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
 .proof-item { background: var(--cream-warm); padding: 30px 28px; border-radius: 18px; border: 1px solid var(--line-soft); }
-.proof-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 4px 10px; background: rgba(74,139,142,0.1); border-radius: 100px; margin-bottom: 16px; }
+.proof-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); padding: 4px 10px; background: rgba(123,205,217,0.1); border-radius: 100px; margin-bottom: 16px; }
 .proof-item h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.3px; }
 .proof-item p { font-size: 15px; line-height: 1.6; color: var(--text-soft); margin-bottom: 12px; }
 .proof-item p strong { color: var(--navy); font-weight: 600; }
@@ -213,14 +262,19 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
         <li><a href="#status">Status</a></li>
         <li class="cta"><a href="#ks" class="pill-cta">Support</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch between Vibrant and Calm theme" onclick="toggleTheme()">Calm</button>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
     <div class="container hero-inner">
         <span class="eyebrow">A personal AI agent, built BY a neurodivergent brain</span>
-        <div class="hero-logo"><img src="assets/seahorse_logo.png" alt="SEAHORSE"></div>
+        <div class="hero-logo">
+            <img class="hl-bg" src="assets/hero_bg.png" alt="" aria-hidden="true">
+            <img class="hl-horse" src="assets/hero_horse.png" alt="SEAHORSE">
+        </div>
         <h1>Your <em>external</em> hippocampus.</h1>
+        <p class="acronym-line"><strong>S.E.A.H.O.R.S.E.</strong> <em>Situational Executive Assistant for Human Organisation, Recall, Support &amp; Execution.</em></p>
         <p class="hero-sub">
             SEAHORSE watches your work life, sweeps for what slipped through, and prompts you when something needs you. <strong>Most AI waits to be asked. SEAHORSE comes to you first.</strong> It does the homework you couldn't.
         </p>
@@ -228,7 +282,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
             <a href="#ks" class="btn btn-primary">Support the Kickstarter</a>
             <a href="#what" class="btn btn-secondary">See what it does</a>
         </div>
-        <p class="hero-note">Engineered around ADHD and Autism brains. Runs on your machine. First 50 sign-ups free forever, then 30-day trial, then £4.99 one-off. No subscription.</p>
+        <p class="hero-note">Engineered around ADHD and Autism brains. Runs on your machine. Free, forever, for everyone. If it helps you and you can afford to, donate to keep us building. Nothing is ever locked behind it.</p>
     </div>
 </header>
 
@@ -328,7 +382,6 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                 <p>The real version: I've lost two jobs because the routing layer of my brain gave way under pressure. Not because I couldn't do the work. Because I couldn't keep track of the work. Missed Slack messages. Dropped email threads. Forgotten meetings I swore I never saw. Anyone with ADHD or Autism knows the feeling.</p>
                 <p class="pull">In 2026, I was so stressed out with work and losing so many tasks because of tunnel vision and chaotic stress, I <em>wanted</em> to quit.</p>
                 <p>That night I started building what would become SEAHORSE. A personal AI agent that watches my work life, sweeps for what I'm dropping, and prompts me when something needs me. Named after the hippocampus, the part of your brain that stores and retrieves memory. Mine gets overwhelmed. SEAHORSE is the external one.</p>
-                <p>SEAHORSE knows I'm ADHD, Autistic, dyslexic, OCPD and RSD, and it communicates with me around exactly that. Precise, never vague, because words blur for me. Blunt, no kid gloves, because being handled gently is the thing I hate most. It never fakes or flatters, because I'd catch it and stop trusting it. It doesn't talk to me like this by accident. It knows who it's for.</p>
                 <p>I'm building it FOR me first. Every feature exists because my brain needs it. The personality mirrors me. The nudges know my workday. Now I'm sharing it with every other neurodivergent person who's been silently drowning the same way I have.</p>
             </div>
         </div>
@@ -435,9 +488,9 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                 <p>SEAHORSE refuses to overwrite your memory cards if a write looks suspect. Empty data over non-empty data: refused. Drops >50% of your entries in one go: refused. Plus rotating startup backups of every state file (last 7 versions kept). <strong>Three layers of defence so an app crash or a sync race never eats your data.</strong></p>
             </div>
             <div class="privacy-item">
-                <h3>First 50 free. 30-day trial. £4.99 one-off.</h3>
-                <p>Three tiers, all friendly. The <strong>first 50 sign-ups</strong> get a permanent <strong>Lifetime</strong> licence, free forever, as a thank-you for helping shape Seahorse during early access. Everyone after starts on a <strong>30-day Trial</strong> with full functionality. After 30 days you can buy a <strong>Paid</strong> licence for <strong>£4.99 one-off</strong> (rising to £9.99 once a real userbase exists). Early adopters lock in the lower price for good.</p>
-                <p><strong>No subscription. No premium tier. No ads. No paywall.</strong> One payment, every future update free, for life. <strong>No paid tier may ever gate ND-help functionality.</strong> If hosted extras land later (server space when a user outgrows local storage, or hosted GPU compute for features beyond home-machine capability), those are optional add-ons, never a wall in front of the core experience. Locked.</p>
+                <h3>Free, forever. Donate if it helps you and you can.</h3>
+                <p>Seahorse is <strong>permanently free for everyone</strong>. No trials, no time bombs, no paid tier, no premium features, no ads, no paywall, no subscription, ever. Full functionality from day one and on every update after.</p>
+                <p>If Seahorse helps you keep your job and you can afford to, a one-off <strong>donation</strong> goes straight back into building it: more dev time, the harder integrations, faster local AI, the phone app. Donations are <strong>thank-yous, not unlocks</strong>. Donors get a small supporter badge in their account; nothing in the app is ever held back from non-donors. <strong>Locked.</strong></p>
             </div>
         </div>
     </div>
@@ -454,7 +507,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                 <h3><span class="dot live"></span>Built and working</h3>
                 <p class="sub">In the daily-driver build · Updated 15 May 2026</p>
                 <ul>
-                    <li><strong>Our own AI lives on your machine.</strong> Seahorsecore v1, built and trained by us. Not OpenAI, not Google, not Meta. Just you and Seahorse.</li>
+                    <li><strong>Our own AI lives on your machine.</strong> Seahorsecore v2, built and trained by us (v3 in training). Not OpenAI, not Google, not Meta. Just you and Seahorse.</li>
                     <li><strong>The judgement layer.</strong> Seahorse forms opinions about what actually matters. "Not your lane" when it isn't. "If you do one thing tonight" when it is. Summary plus opinion, not summary alone.</li>
                     <li><strong>The morning brief.</strong> Pulls overnight Slack, email, and calendar into one calm summary at the time you pick. Weekdays-only toggle. "Brief me now" button when you want it on demand.</li>
                     <li><strong>An "On my mind" shelf</strong> that holds things gently and keeps reminding you in chat until you tick them off. One click to acknowledge each one.</li>
@@ -475,39 +528,39 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                     <li><strong>Optional cloud horsepower.</strong> Bring your own Claude or OpenAI keys if you want it. Off by default.</li>
                     <li><strong>Won't make things up.</strong> If Seahorse doesn't know, it says so. Anti-fabrication guards built in.</li>
                     <li><strong>Your memory can't get silently wiped.</strong> Rotating backups plus refuse-to-overwrite logic.</li>
-                    <li><strong>Connections live:</strong> Linear, Slack, Zoho Mail, Notion, Jira.</li>
+                    <li><strong>Connections live:</strong> Linear, Slack, Zoho Mail, Outlook / Hotmail, Notion, Jira, Confluence, Google Calendar, Todoist, GitHub, Figma, Asana.</li>
                 </ul>
             </div>
             <div class="status-card">
                 <h3><span class="dot building"></span>Currently building</h3>
                 <p class="sub">Landing over the next few months</p>
                 <ul>
-                    <li><strong>Seahorsecore v2.</strong> Our next AI brain, training right now. Bigger context, sharper judgement, warmer voice.</li>
+                    <li><strong>Seahorsecore v3.</strong> Our next AI brain, in training now. Sharper judgement, warmer voice, even less likely to fabricate.</li>
                     <li><strong>"What is this?" universal query.</strong> Paste a name, project, or topic. Seahorse pulls every thread, doc, message, and meeting it has touched, sorted by source.</li>
                     <li><strong>Knows who's talking in meetings.</strong> Tell it "that was Sam" once, it adds her voice to her memory card. Next time it knows on its own.</li>
                     <li><strong>Auto-handles reschedules.</strong> When a meeting gets moved in Slack chat, Seahorse updates your calendar for you and tells you straight: "I moved your 2pm to 3pm, here's the new invite." Undo with one click if it got it wrong.</li>
                     <li><strong>Refine memory cards by talking.</strong> "Update Sam's card, she just got promoted" and it does.</li>
-                    <li>Email for Gmail, Outlook, iCloud, Proton, Fastmail, Yahoo (Zoho already live).</li>
+                    <li>Email for Gmail, iCloud, Fastmail, Yahoo (Zoho and Outlook / Hotmail already live).</li>
                     <li>Phone app, syncs via your own Google Drive or OneDrive.</li>
                     <li>Memory export to a markdown folder you own.</li>
                     <li>Memory import from Obsidian, Notion, Apple Notes.</li>
                     <li><strong>Voice cloning.</strong> Seahorse currently speaks as Maisie, a calm child voice (yes, on purpose). Soon you'll be able to swap her for any voice you want.</li>
                     <li>Quietly notices when you keep talking about the same person or thing and offers to make a memory card for it.</li>
-                    <li>30+ more integrations: Discord, Teams, WhatsApp, GitHub, Trello, Drive, more.</li>
+                    <li>The hard-to-reach integrations (Discord, Teams, WhatsApp, iMessage, Apple Reminders, PureRef), the ones that need real research or paid infrastructure to unlock. <strong>Donations directly fund these.</strong></li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<!-- KICKSTARTER -->
+<!-- DONATE -->
 <section class="ks" id="ks">
     <div class="container">
         <div class="ks-inner">
             <p class="section-eyebrow">Support SEAHORSE</p>
-            <h2>£4.99 one-off. <em>Backed</em> by people who give a damn.</h2>
+            <h2>Free, forever. <em>Backed</em> by people who give a damn.</h2>
             <p class="ks-lede">
-                SEAHORSE is free for the first 50 sign-ups (Lifetime tier), then 30 days free for everyone else (Trial tier), then <strong>£4.99 one-off</strong> (rising to £9.99 later), with <strong>free lifetime updates</strong> and no subscription. The Kickstarter is for people who want to back the project beyond the price tag. <strong>The more support I raise, the deeper I can build.</strong> Bigger pledges mean more dev time, faster features, more integrations, better voice. You give what you can on top of the price. Early Kickstarter backers lock in the £4.99 price for good.
+                SEAHORSE is <strong>free for everyone, forever</strong>. No subscription, no paid tier, no time bombs. If it helps you and you can afford to, a one-off <strong>donation</strong> keeps us building. <strong>The more support we raise, the deeper we can build:</strong> more dev time, the hard-to-reach integrations, faster local AI, the phone app. Donate what feels right. <strong>Nothing in the app is ever locked behind a donation</strong>, donors just get a small supporter badge as a thank-you.
             </p>
             <div class="ks-stretches">
                 <h4>What more funding makes possible</h4>
@@ -516,7 +569,7 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                     <li>Voice cloning and more natural-sounding voices</li>
                     <li>Phone app priority (currently scheduled after the Windows core stabilises)</li>
                     <li>Faster local AI models so responses feel instant on average hardware</li>
-                    <li>More integrations, landing faster</li>
+                    <li>The hard-to-reach integrations: Discord, Teams, WhatsApp, iMessage, Apple Reminders, PureRef (the T4 group that needs real research or paid infra)</li>
                     <li>Speaker identification in meetings (real "who's talking" intelligence)</li>
                     <li>Calendar-to-Slack reconciliation (auto-catch reschedules)</li>
                 </ul>
@@ -524,16 +577,16 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                 <ul>
                     <li>Ads in the app, ever</li>
                     <li>Subscriptions of any kind</li>
-                    <li>Paid tiers that gate core ND functionality</li>
+                    <li>Paid tiers, ever</li>
                     <li>Selling your data to anyone, for any reason</li>
                 </ul>
             </div>
             <div class="ks-cta-row">
-                <a href="#" class="btn btn-primary">Back on Kickstarter</a>
-                <a href="#" class="btn btn-secondary">Donate via PayPal</a>
+                <a href="#" class="btn btn-primary">Donate via PayPal</a>
                 <a href="#" class="btn btn-secondary">Buy me a coffee</a>
+                <a href="#" class="btn btn-secondary">Back on Kickstarter</a>
             </div>
-            <p class="ks-footnote">Kickstarter and donation links go live when SEAHORSE's KS campaign launches. Drop your email below to know the moment it does.</p>
+            <p class="ks-footnote">Donation links go live shortly. Drop your email below to know the moment they do, and to hear when SEAHORSE is ready to download.</p>
         </div>
     </div>
 </section>
@@ -572,8 +625,9 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
             </div>
         </div>
         <div class="footer-legal">
+            <strong>S.E.A.H.O.R.S.E.</strong> · <em>Situational Executive Assistant for Human Organisation, Recall, Support &amp; Execution</em><br>
             © 2026 <strong>Ironbridge Games LTD</strong> · Company No. 16882669 · 2 Jarvis Place, St Michaels, Tenterden, TN30 6DQ<br>
-            First 50 free forever · 30-day trial after · £4.99 one-off, free lifetime updates · Built with care in Kent
+            Free, forever, for everyone · Donate to keep us building · No subscriptions, no paid tier, ever · Built with care in Kent
         </div>
     </div>
 </footer>
@@ -585,4 +639,43 @@ function handleSignup(event) {
     console.log('Signup intent:', f.email.value);
     f.style.display = 'none';
     document.getElementById('signupSuccess').classList.add('show');
-    re
+    return false;
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 100, behavior: 'smooth' }); }
+    });
+});
+
+/* === Theme toggle (Vibrant / Calm) ===
+   Default = Vibrant (purple primary, cyan accent). Calm = blue primary, grey accent.
+   Persists via localStorage so the choice sticks across pages + visits. */
+(function() {
+    const themeKey = 'seahorse_theme';
+    const saved = localStorage.getItem(themeKey);
+    if (saved === 'calm') document.documentElement.setAttribute('data-theme', 'calm');
+    updateThemeButton();
+})();
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    if (current === 'calm') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('seahorse_theme', 'vibrant');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'calm');
+        localStorage.setItem('seahorse_theme', 'calm');
+    }
+    updateThemeButton();
+}
+function updateThemeButton() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    const current = document.documentElement.getAttribute('data-theme');
+    /* Show the OTHER theme name as the action label */
+    btn.textContent = current === 'calm' ? 'Vibrant' : 'Calm';
+}
+</script>
+
+</body>
+</html>
