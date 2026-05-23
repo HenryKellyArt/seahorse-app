@@ -222,9 +222,33 @@ if (intent === "download" && sizeNames[size]) {
     try { localStorage.setItem("seahorse:intent:size", size); } catch {}
 }
 
-// Post-confirm state: when the Worker redirects back with ?signed_in=1,
-// flip into the download-ready card. (Future PR: actually read a
-// session cookie / JWT and show the user's real email.)
+// Session check: ask the worker who we are. The 90-day session cookie
+// is set by /auth/confirm when the user clicks their magic link. If
+// it's still valid, /me returns 200 with the identity and we jump
+// straight to the signed-in / download state, no email re-entry
+// required. 401 / network error -> fall through to the sign-in form.
+// Henry 2026-05-23: this is the friction-killer for returning users.
+(async function checkSession() {
+    try {
+        const resp = await fetch(`${WORKER_BASE}/me`, {
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+        });
+        if (!resp.ok) return; // 401 = not signed in, fine, show form
+        const me = await resp.json();
+        if (!me || !me.email) return;
+        try { localStorage.setItem("seahorse:user:email", me.email); } catch {}
+        document.getElementById("userEmail").textContent = me.email;
+        document.getElementById("signinState").style.display = "none";
+        document.getElementById("downloadState").style.display = "block";
+    } catch {
+        // Network error -> just show the form. Don't block the user.
+    }
+})();
+
+// Legacy redirect param (kept harmless). If the worker ever lands the
+// user back here with ?signed_in=1, flip into the download state.
 if (params.get("signed_in") === "1") {
     document.getElementById("signinState").style.display = "none";
     document.getElementById("downloadState").style.display = "block";

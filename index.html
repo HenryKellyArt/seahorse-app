@@ -102,11 +102,13 @@ body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height
    coloured light around the icon rather than a flat white halo.
    Henry 2026-05-23: "glow is to add to the glow around the hero BG and
    change the colour to a purple ish pink". */
+/* Henry 2026-05-23: glow stays static (only the seahorse breathes)
+   and tightened to a subtle halo, not a full ambient bloom. */
 .hero-logo .hl-glow {
     position: absolute;
-    inset: -80%;
+    inset: -20%;
     z-index: 0;
-    background: radial-gradient(circle, #f0abfc 0%, #d946ef 30%, #a21caf 60%, transparent 75%);
+    background: radial-gradient(circle, #f0abfc 0%, #d946ef 35%, #a21caf 65%, transparent 78%);
     -webkit-mask-image: url(assets/seahorse_glow.png);
             mask-image: url(assets/seahorse_glow.png);
     -webkit-mask-size: contain;
@@ -115,22 +117,16 @@ body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height
             mask-repeat: no-repeat;
     -webkit-mask-position: center;
             mask-position: center;
-    opacity: 0.9;
+    opacity: 0.7;
     pointer-events: none;
-    animation: seahorseGlowPulse 5.2s ease-in-out infinite;
 }
 .hero-logo .hl-horse { animation: seahorseBreathe 4.4s ease-in-out infinite; transform-origin: center; will-change: transform; }
 @keyframes seahorseBreathe {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
 }
-@keyframes seahorseGlowPulse {
-    0%, 100% { opacity: 0.85; transform: scale(1); }
-    50%      { opacity: 1;    transform: scale(1.04); }
-}
 @media (prefers-reduced-motion: reduce) {
     .hero-logo .hl-horse { animation: none; }
-    .hero-logo .hl-glow { animation: none; opacity: 0.9; transform: none; }
 }
 h1 { font-size: 68px; font-weight: 800; letter-spacing: -2px; line-height: 1.0; color: var(--navy); max-width: 800px; margin: 0 auto 24px; }
 h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
