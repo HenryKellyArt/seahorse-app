@@ -349,6 +349,19 @@ h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color:
 .download-note { text-align: center; font-size: 13px; color: var(--text-mute); max-width: 640px; margin: 0 auto; line-height: 1.6; }
 .download-note strong { color: var(--text-soft); font-weight: 600; }
 
+/* CONTACT CTA: visible "have questions? email me" section between
+   Download and Donate. Henry 2026-05-23: the footer mention wasn't
+   prominent enough; people reading the page need a clear invite to
+   reach out before they're asked to register or donate. */
+.contact-cta { background: var(--cream-warm); padding: 70px 0; }
+.contact-card { max-width: 680px; margin: 0 auto; padding: 44px 36px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; text-align: center; box-shadow: 0 18px 44px rgba(103,23,205,0.06); }
+.contact-card h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; color: var(--navy); margin-bottom: 14px; }
+.contact-card h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.contact-lede { font-size: 16px; line-height: 1.6; color: var(--text-soft); margin-bottom: 26px; max-width: 540px; margin-left: auto; margin-right: auto; }
+.contact-btn { display: inline-block; padding: 16px 32px; background: var(--navy); color: var(--white); text-decoration: none; border-radius: 100px; font-weight: 700; font-size: 16px; transition: all .15s; box-shadow: 0 10px 28px rgba(103,23,205,0.16); }
+.contact-btn:hover { background: var(--navy-deep); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(103,23,205,0.22); }
+@media (max-width: 600px) { .contact-card { padding: 32px 22px; } .contact-card h2 { font-size: 28px; } .contact-btn { font-size: 14px; padding: 14px 24px; } }
+
 /* FOOTER */
 footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-top: 1px solid var(--line-soft); background: var(--cream-warm); }
 .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
@@ -777,6 +790,18 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
     </div>
 </section>
 
+<!-- CONTACT -->
+<section class="contact-cta" id="contact">
+    <div class="container">
+        <div class="contact-card">
+            <span class="section-eyebrow">Got questions?</span>
+            <h2>Want to know <em>more</em>?</h2>
+            <p class="contact-lede">Got a question, a feature you want, or just want to tell me how SEAHORSE is landing for your brain? Drop me a line. Real inbox, real reply, not a ticket queue.</p>
+            <a class="contact-btn" href="mailto:info@seahorseapp.co.uk">info@seahorseapp.co.uk</a>
+        </div>
+    </div>
+</section>
+
 <!-- DONATE -->
 <section class="ks" id="ks">
     <div class="container">
@@ -806,11 +831,11 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
                 </ul>
             </div>
             <div class="ks-cta-row">
-                <a href="#" class="btn btn-primary">Donate via PayPal</a>
-                <a href="#" class="btn btn-secondary">Buy me a coffee</a>
-                <a href="#" class="btn btn-secondary">Back on Kickstarter</a>
+                <a href="https://paypal.me/HenryKelly0" class="btn btn-primary" target="_blank" rel="noopener">Donate via PayPal</a>
+                <a href="#" class="btn btn-secondary">Buy me a coffee (soon)</a>
+                <a href="#" class="btn btn-secondary">Back on Kickstarter (soon)</a>
             </div>
-            <p class="ks-footnote">Donation links go live shortly. Drop your email below to know the moment they do, and to hear when SEAHORSE is ready to download.</p>
+            <p class="ks-footnote">PayPal donations are live. Buy Me A Coffee and Kickstarter go live shortly. Drop your email below to hear when SEAHORSE is ready to download.</p>
         </div>
     </div>
 </section>
