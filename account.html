@@ -61,12 +61,29 @@ h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color:
 
 form.auth-form { display: flex; flex-direction: column; gap: 12px; }
 .auth-form label { font-size: 13px; font-weight: 600; color: var(--text-soft); }
-.auth-form input { padding: 15px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); color: var(--navy); font-family: inherit; font-size: 15px; transition: border-color .15s; }
+.auth-form input[type="email"], .auth-form input[type="password"] { padding: 15px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); color: var(--navy); font-family: inherit; font-size: 15px; transition: border-color .15s; }
 .auth-form input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(123,205,217,0.15); }
-.auth-form button { background: var(--navy); color: var(--white); padding: 15px 24px; border: none; border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; transition: all .15s; margin-top: 8px; }
-.auth-form button:hover { background: var(--navy-deep); transform: translateY(-1px); }
-.auth-form button:disabled { background: var(--text-mute); cursor: not-allowed; transform: none; }
+.auth-form button[type="submit"] { background: var(--navy); color: var(--white); padding: 15px 24px; border: none; border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; transition: all .15s; margin-top: 8px; }
+.auth-form button[type="submit"]:hover { background: var(--navy-deep); transform: translateY(-1px); }
+.auth-form button[type="submit"]:disabled { background: var(--text-mute); cursor: not-allowed; transform: none; }
 .auth-form .form-note { font-size: 12px; color: var(--text-mute); line-height: 1.5; margin-top: 4px; }
+
+/* Register / Sign in mode tabs. Two pills, active one filled. */
+.auth-mode-tabs { display: flex; gap: 6px; background: var(--cream-warm, #F6F8FA); padding: 5px; border-radius: 14px; margin-bottom: 18px; }
+.auth-mode-tab { flex: 1; padding: 11px 16px; background: transparent; border: 0; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text-soft); cursor: pointer; transition: all .15s; }
+.auth-mode-tab.is-active { background: var(--white); color: var(--navy); box-shadow: 0 2px 8px rgba(103,23,205,0.08); }
+.auth-mode-tab:hover:not(.is-active) { color: var(--navy); }
+
+/* Newsletter consent checkbox row. */
+.auth-checkbox { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0 2px; font-size: 13.5px; color: var(--text-soft); cursor: pointer; line-height: 1.5; font-weight: 400; }
+.auth-checkbox input { width: 16px; height: 16px; margin-top: 3px; accent-color: var(--navy); cursor: pointer; flex-shrink: 0; }
+.auth-checkbox span { flex: 1; }
+.form-note-inline { display: block; font-size: 11.5px; color: var(--text-mute); margin-top: 2px; line-height: 1.45; }
+
+/* Magic-link fallback link, sits under the submit button. */
+.auth-magic-fallback { text-align: center; margin-top: 6px; }
+.auth-magic-fallback a { font-size: 13px; color: var(--text-soft); text-decoration: none; border-bottom: 1px dashed var(--text-mute); padding-bottom: 1px; }
+.auth-magic-fallback a:hover { color: var(--navy); border-color: var(--navy); }
 
 .intent-banner { background: rgba(40,113,250,0.08); border: 1px solid rgba(40,113,250,0.2); border-radius: 14px; padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: var(--navy); display: flex; align-items: center; gap: 10px; }
 .intent-banner strong { font-weight: 700; }
@@ -120,8 +137,8 @@ footer a:hover { color: var(--navy); }
         <!-- ===== Register / Sign-in state (default) ===== -->
         <div class="signin-state" id="signinState">
             <span class="eyebrow">Register / Sign in</span>
-            <h1>Register or sign in to <em>SEAHORSE</em>.</h1>
-            <p class="lede">No password. Drop your email and I'll send you a one-time magic link. Click it on this device and you're in. New emails create an account, existing ones sign back in. Same flow either way.</p>
+            <h1 id="formTitle">Register for <em>SEAHORSE</em>.</h1>
+            <p class="lede" id="formLede">Email + password. No inbox round-trip, no magic link unless you want one. We email you ONCE when v3 is ready to download.</p>
 
             <!-- Intent banner, shown when arriving from a download CTA so the user
                  knows what they're signing in to do. -->
@@ -130,17 +147,37 @@ footer a:hover { color: var(--navy); }
                 <span><strong id="intentSize">Reef</strong> download will be ready once you're signed in.</span>
             </div>
 
+            <!-- Mode tabs: Register (new account) vs Sign in (existing). -->
+            <div class="auth-mode-tabs">
+                <button type="button" class="auth-mode-tab is-active" data-mode="register" id="tabRegister">Register</button>
+                <button type="button" class="auth-mode-tab" data-mode="login" id="tabLogin">Sign in</button>
+            </div>
+
             <form class="auth-form" id="authForm" novalidate>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-                <button type="submit" id="submitBtn">Send me a magic link</button>
-                <div class="form-note">One link, single-use, expires in 15 minutes. We use this to track which devices have the model so we can deliver updates. We never sell, share, or otherwise touch your data.</div>
+
+                <label for="password" id="passwordLabel">Choose a password</label>
+                <input type="password" id="password" name="password" placeholder="8+ characters" autocomplete="new-password" minlength="8" required>
+
+                <label class="auth-checkbox" id="newsletterRow">
+                    <input type="checkbox" id="newsletterOptIn" checked>
+                    <span>Email me when SEAHORSE is ready to download. <span class="form-note-inline">One email at launch, plus major-update notices. No spam, unsubscribe any time.</span></span>
+                </label>
+
+                <button type="submit" id="submitBtn">Create account</button>
+
+                <div class="auth-magic-fallback">
+                    <a href="#" id="magicLinkLink">Forgot password? Send me a magic link instead</a>
+                </div>
+
+                <div class="form-note">90-day sessions on this device. Across devices use the magic-link option. We use this to track install count and notify you on launch. We never sell, share, or otherwise touch your data.</div>
             </form>
 
             <div class="error-state" id="errorState"></div>
 
             <div class="honest-footer">
-                <strong>Honest status:</strong> the accounts service is being deployed. If the form below 404s, the Worker isn't live yet. Try again in a few hours, or drop your email on the <a href="index.html#signup">main signup form</a> for a heads-up the moment it goes live.
+                <strong>Honest status:</strong> the v3 model is still training. Registration is open now so you're on the list the moment downloads light up. The "Forgot password?" link sends a single-use magic link if you ever get locked out.
             </div>
         </div>
 
@@ -256,54 +293,165 @@ if (params.get("signed_in") === "1") {
     if (stashedEmail) document.getElementById("userEmail").textContent = stashedEmail;
 }
 
-// Form submit. Calls POST /auth/start. Returns 200 always (enumeration-
-// safe by design: we surface the same "check your inbox" message no
-// matter what so an attacker can't probe which addresses have accounts).
+// ─────────────────────────────────────────────────────────────
+// Auth form: 3 modes
+//   register  -> POST /auth/register  (email + password, opt newsletter)
+//   login     -> POST /auth/login     (email + password)
+//   magic     -> POST /auth/start     (email only, magic link to inbox)
+// Default is "register". The mode tabs swap between register and login.
+// The "Forgot password?" link drops into magic-link mode (one-shot).
+// ─────────────────────────────────────────────────────────────
 const form = document.getElementById("authForm");
 const submitBtn = document.getElementById("submitBtn");
 const errorState = document.getElementById("errorState");
+const tabRegister = document.getElementById("tabRegister");
+const tabLogin = document.getElementById("tabLogin");
+const formTitle = document.getElementById("formTitle");
+const formLede = document.getElementById("formLede");
+const passwordInput = document.getElementById("password");
+const passwordLabel = document.getElementById("passwordLabel");
+const newsletterRow = document.getElementById("newsletterRow");
+const newsletterOptIn = document.getElementById("newsletterOptIn");
+const magicLinkLink = document.getElementById("magicLinkLink");
+
+let authMode = "register"; // register | login | magic
+
+function applyModeUI() {
+    tabRegister.classList.toggle("is-active", authMode === "register");
+    tabLogin.classList.toggle("is-active", authMode === "login");
+    if (authMode === "register") {
+        formTitle.innerHTML = "Register for <em>SEAHORSE</em>.";
+        formLede.textContent = "Email + password. No inbox round-trip, no magic link unless you want one. We email you ONCE when v3 is ready to download.";
+        passwordLabel.textContent = "Choose a password";
+        passwordInput.placeholder = "8+ characters";
+        passwordInput.setAttribute("autocomplete", "new-password");
+        passwordInput.style.display = "";
+        passwordLabel.style.display = "";
+        newsletterRow.style.display = "";
+        submitBtn.textContent = "Create account";
+    } else if (authMode === "login") {
+        formTitle.innerHTML = "Sign in to <em>SEAHORSE</em>.";
+        formLede.textContent = "Welcome back. Drop your email and password.";
+        passwordLabel.textContent = "Password";
+        passwordInput.placeholder = "Your password";
+        passwordInput.setAttribute("autocomplete", "current-password");
+        passwordInput.style.display = "";
+        passwordLabel.style.display = "";
+        newsletterRow.style.display = "none";
+        submitBtn.textContent = "Sign in";
+    } else if (authMode === "magic") {
+        formTitle.innerHTML = "Magic link to <em>SEAHORSE</em>.";
+        formLede.textContent = "Email only. We'll send you a one-time link. Click it on this device and you're in for 90 days.";
+        passwordInput.style.display = "none";
+        passwordLabel.style.display = "none";
+        passwordInput.removeAttribute("required");
+        newsletterRow.style.display = "none";
+        submitBtn.textContent = "Send me a magic link";
+    }
+}
+
+tabRegister.addEventListener("click", () => { authMode = "register"; passwordInput.setAttribute("required", "required"); applyModeUI(); errorState.style.display = "none"; });
+tabLogin.addEventListener("click", () => { authMode = "login"; passwordInput.setAttribute("required", "required"); applyModeUI(); errorState.style.display = "none"; });
+magicLinkLink.addEventListener("click", (e) => { e.preventDefault(); authMode = "magic"; applyModeUI(); errorState.style.display = "none"; });
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
     errorState.style.display = "none";
+
     const email = document.getElementById("email").value.trim();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errorState.textContent = "That doesn't look like a valid email.";
-        errorState.style.display = "block";
+        showError("That doesn't look like a valid email.");
         return;
     }
+
+    const password = passwordInput.value;
+    if (authMode !== "magic") {
+        if (password.length < 8) {
+            showError("Password needs to be at least 8 characters.");
+            return;
+        }
+    }
+
+    const originalLabel = submitBtn.textContent;
     submitBtn.disabled = true;
-    submitBtn.textContent = "Sending…";
+    submitBtn.textContent = authMode === "magic" ? "Sending…" : "Working…";
     try { localStorage.setItem("seahorse:user:email", email); } catch {}
 
     try {
-        const resp = await fetch(`${WORKER_BASE}/auth/start`, {
-            method: "POST",
-            mode: "cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, purpose: "signup" }),
-        });
-        // Worker returns 200 even on most internal failures; only a network
-        // error bubbles up here. Treat 200 as "we tried", show inbox card.
-        if (resp.ok) {
-            showSentState(email);
+        let resp, body;
+        if (authMode === "register") {
+            body = { email, password, newsletter_opted_in: newsletterOptIn.checked };
+            resp = await fetch(`${WORKER_BASE}/auth/register`, {
+                method: "POST",
+                mode: "cors",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+        } else if (authMode === "login") {
+            body = { email, password };
+            resp = await fetch(`${WORKER_BASE}/auth/login`, {
+                method: "POST",
+                mode: "cors",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
         } else {
-            // Likely 404 → Worker not deployed yet. Be honest.
-            errorState.innerHTML = "The accounts service isn't live yet (HTTP " + resp.status + "). Drop your email on the <a href='index.html#signup' style='color:var(--navy);text-decoration:underline'>main signup form</a> and you'll be among the first told when it goes live.";
-            errorState.style.display = "block";
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Send me a magic link";
+            body = { email, purpose: "signup" };
+            resp = await fetch(`${WORKER_BASE}/auth/start`, {
+                method: "POST",
+                mode: "cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
         }
-    } catch (err) {
-        // Network error, most often "Worker not deployed yet" /
-        // CORS / no DNS. Honest copy beats a generic "something went
-        // wrong".
-        errorState.innerHTML = "Couldn't reach the accounts service (probably not deployed yet). Drop your email on the <a href='index.html#signup' style='color:var(--navy);text-decoration:underline'>main signup form</a> for a heads-up when it goes live.";
-        errorState.style.display = "block";
+
+        if (authMode === "magic") {
+            // Always treat as success (enumeration-safe).
+            if (resp.ok) {
+                showSentState(email);
+            } else {
+                showError(`Couldn't reach the accounts service (HTTP ${resp.status}). Try again in a minute.`);
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalLabel;
+            }
+            return;
+        }
+
+        // register / login: distinguish success from specific errors.
+        if (resp.ok) {
+            // Cookie set by the worker. Flip to download state.
+            document.getElementById("userEmail").textContent = email;
+            document.getElementById("signinState").style.display = "none";
+            document.getElementById("downloadState").style.display = "block";
+            return;
+        }
+        const data = await resp.json().catch(() => ({}));
+        if (resp.status === 409 || data.error === "email_in_use") {
+            showError("That email is already registered. Switch to Sign in.");
+        } else if (resp.status === 401 || data.error === "invalid_credentials") {
+            showError("Invalid email or password. Use 'Forgot password?' below if you only ever registered with a magic link.");
+        } else if (resp.status === 429) {
+            showError("Too many attempts. Wait a minute and try again.");
+        } else if (resp.status === 400 && data.error === "password_too_short") {
+            showError("Password needs to be at least 8 characters.");
+        } else {
+            showError(`Something went wrong (HTTP ${resp.status}). Try again or use 'Forgot password?' for a magic link.`);
+        }
         submitBtn.disabled = false;
-        submitBtn.textContent = "Send me a magic link";
+        submitBtn.textContent = originalLabel;
+    } catch (err) {
+        showError("Couldn't reach the accounts service (network error). Check your connection and try again.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
     }
 });
+
+function showError(msg) {
+    errorState.textContent = msg;
+    errorState.style.display = "block";
+}
 
 function showSentState(email) {
     document.getElementById("sentEmail").textContent = email;
