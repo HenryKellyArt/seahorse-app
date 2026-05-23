@@ -60,6 +60,10 @@ body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height
 .pill-links { display: flex; gap: 2px; list-style: none; }
 .pill-links a { color: rgba(242,244,247,0.7); text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 17px; border-radius: 100px; transition: all .15s; }
 .pill-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.pill-cta { background: var(--white); color: var(--navy) !important; padding: 10px 19px !important; border-radius: 100px; font-weight: 700 !important; font-size: 14px !important; margin-left: 6px; }
+.pill-cta:hover { background: var(--cream) !important; transform: scale(1.02); }
+.pill-cta-secondary { background: transparent !important; color: rgba(242,244,247,0.95) !important; border: 1.5px solid rgba(255,255,255,0.45); }
+.pill-cta-secondary:hover { background: rgba(255,255,255,0.12) !important; border-color: rgba(255,255,255,0.7); transform: scale(1.02); }
 @media (max-width: 720px) { .pill-nav { padding: 8px 14px; top: 12px; } .pill-links li:not(.cta) { display: none; } .pill-brand { padding-right: 12px; margin-right: 0; } }
 
 header.policy-head { padding: 140px 0 40px; text-align: center; }
@@ -101,8 +105,10 @@ footer { padding: 56px 0 30px; font-size: 13px; color: var(--text-mute); border-
     <a href="index.html" class="pill-brand"><img src="assets/seahorse_logo.png" alt="SEAHORSE"><span>SEAHORSE</span></a>
     <ul class="pill-links">
         <li><a href="index.html#what">What it does</a></li>
-        <li><a href="index.html#story">Story</a></li>
+        <li><a href="index.html#tutorials">Tutorials</a></li>
+        <li><a href="index.html#download">Download</a></li>
         <li><a href="index.html#status">Status</a></li>
+        <li class="cta"><a href="account.html" class="pill-cta pill-cta-secondary">Register / Sign in</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Switch between Vibrant and Calm theme" onclick="toggleTheme()">Calm</button>
 </nav>
