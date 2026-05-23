@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SEAHORSE account: sign in with a magic link to download Seahorse Shallow / Reef / Deep.">
+<meta name="theme-color" content="#6717cd">
+<meta property="og:title" content="SEAHORSE account">
+<meta property="og:description" content="Sign in to download Seahorse.">
+<meta property="og:image" content="https://seahorseapp.co.uk/assets/seahorse_appicon.png">
+<meta property="og:url" content="https://seahorseapp.co.uk/account.html">
+<title>Account · SEAHORSE</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #6717cd;
+    --primary-deep: #4a0fa0;
+    --secondary: #2871fa;
+    --accent: #7BCDD9;
+    --accent-soft: #A5D9E0;
+    --line: rgba(103,23,205,0.12);
+    --line-soft: rgba(103,23,205,0.06);
+    --cream: #F2F4F7; --cream-warm: #F6F8FA;
+    --white: #FFF;
+    --text: #1A2B3D; --text-soft: #5A6B7E; --text-mute: #8B9AAE;
+    --navy: var(--primary);
+    --navy-deep: var(--primary-deep);
+    --teal: var(--accent);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.6; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+.bg-glow { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.bg-glow::before { content: ""; position: absolute; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse, rgba(103,23,205,0.10) 0%, transparent 70%); }
+.bg-glow::after { content: ""; position: absolute; bottom: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(123,205,217,0.08) 0%, transparent 70%); }
+
+header.topbar { position: relative; z-index: 2; padding: 24px 0; }
+header.topbar .container { display: flex; align-items: center; justify-content: space-between; }
+.brand-link { display: inline-flex; align-items: center; gap: 12px; color: var(--navy); text-decoration: none; font-weight: 700; }
+.brand-link img { width: 32px; height: 32px; }
+.brand-link span { font-size: 18px; letter-spacing: 0.4px; }
+.topbar-back { color: var(--text-soft); text-decoration: none; font-size: 14px; font-weight: 500; }
+.topbar-back:hover { color: var(--navy); }
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+main { flex: 1; position: relative; z-index: 1; padding: 60px 0 80px; }
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 48px 48px 44px; max-width: 560px; margin: 0 auto; box-shadow: 0 24px 60px rgba(103,23,205,0.06); }
+@media (max-width: 640px) { .card { padding: 36px 28px; } }
+
+.eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--teal); padding: 5px 12px; background: rgba(123,205,217,0.12); border: 1px solid rgba(123,205,217,0.22); border-radius: 100px; margin-bottom: 22px; }
+h1 { font-size: 36px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; color: var(--navy); margin-bottom: 14px; }
+h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.lede { font-size: 16px; line-height: 1.6; color: var(--text-soft); margin-bottom: 28px; }
+.lede strong { color: var(--navy); font-weight: 600; }
+
+form.auth-form { display: flex; flex-direction: column; gap: 12px; }
+.auth-form label { font-size: 13px; font-weight: 600; color: var(--text-soft); }
+.auth-form input { padding: 15px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); color: var(--navy); font-family: inherit; font-size: 15px; transition: border-color .15s; }
+.auth-form input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(123,205,217,0.15); }
+.auth-form button { background: var(--navy); color: var(--white); padding: 15px 24px; border: none; border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; transition: all .15s; margin-top: 8px; }
+.auth-form button:hover { background: var(--navy-deep); transform: translateY(-1px); }
+.auth-form button:disabled { background: var(--text-mute); cursor: not-allowed; transform: none; }
+.auth-form .form-note { font-size: 12px; color: var(--text-mute); line-height: 1.5; margin-top: 4px; }
+
+.intent-banner { background: rgba(40,113,250,0.08); border: 1px solid rgba(40,113,250,0.2); border-radius: 14px; padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+.intent-banner strong { font-weight: 700; }
+.intent-banner-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--secondary); color: var(--white); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+.success-state, .error-state { display: none; }
+.success-state h2 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.success-state p { color: var(--text-soft); font-size: 15px; line-height: 1.55; }
+.success-state .check-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(46,204,113,0.14); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.success-state .check-icon::before { content: ""; width: 18px; height: 11px; border-left: 3px solid #2ecc71; border-bottom: 3px solid #2ecc71; transform: rotate(-45deg); margin-top: -4px; }
+.error-state { background: rgba(201,121,112,0.08); border: 1px solid rgba(201,121,112,0.22); border-radius: 14px; padding: 14px 18px; margin-top: 14px; font-size: 14px; color: #8a3a30; }
+
+.honest-footer { margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--line-soft); font-size: 12px; color: var(--text-mute); line-height: 1.6; }
+.honest-footer strong { color: var(--text-soft); font-weight: 600; }
+.honest-footer a { color: var(--text-soft); }
+.honest-footer a:hover { color: var(--navy); }
+
+.download-ready { display: none; }
+.download-ready h2 { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.5px; }
+.download-ready h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.download-ready p.lede { margin-bottom: 24px; }
+.download-pill { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; }
+.download-pill-info { display: flex; flex-direction: column; gap: 2px; }
+.download-pill-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+.download-pill-name em { font-family: 'Lora', serif; font-style: italic; font-weight: 500; color: var(--teal); }
+.download-pill-meta { font-size: 12px; color: var(--text-mute); }
+.download-pill-cta { padding: 10px 18px; border-radius: 100px; background: var(--navy); color: var(--white); font-weight: 700; font-size: 13px; text-decoration: none; transition: all .15s; }
+.download-pill-cta:hover { background: var(--navy-deep); transform: translateY(-1px); }
+.download-pill.is-pending .download-pill-cta { background: var(--text-mute); cursor: not-allowed; pointer-events: none; opacity: 0.5; }
+.pending-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--rose, #C97970); margin-left: 6px; }
+
+footer { padding: 32px 0; font-size: 12px; color: var(--text-mute); text-align: center; }
+footer a { color: var(--text-soft); text-decoration: none; margin: 0 10px; }
+footer a:hover { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<div class="bg-glow" aria-hidden="true"></div>
+
+<header class="topbar">
+    <div class="container">
+        <a class="brand-link" href="index.html"><img src="assets/seahorse_logo.png" alt=""><span>SEAHORSE</span></a>
+        <a class="topbar-back" href="index.html">&larr; Back to site</a>
+    </div>
+</header>
+
+<main>
+    <div class="card" id="card">
+
+        <!-- ===== Sign-in state (default) ===== -->
+        <div class="signin-state" id="signinState">
+            <span class="eyebrow">Account</span>
+            <h1>Sign in to <em>SEAHORSE</em>.</h1>
+            <p class="lede">No password. Drop your email and I'll send you a one-time magic link. Click it on this device and you're in.</p>
+
+            <!-- Intent banner, shown when arriving from a download CTA so the user
+                 knows what they're signing in to do. -->
+            <div class="intent-banner" id="intentBanner" style="display: none;">
+                <span class="intent-banner-icon" aria-hidden="true">↓</span>
+                <span><strong id="intentSize">Reef</strong> download will be ready once you're signed in.</span>
+            </div>
+
+            <form class="auth-form" id="authForm" novalidate>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+                <button type="submit" id="submitBtn">Send me a magic link</button>
+                <div class="form-note">One link, single-use, expires in 15 minutes. We use this to track which devices have the model so we can deliver updates. We never sell, share, or otherwise touch your data.</div>
+            </form>
+
+            <div class="error-state" id="errorState"></div>
+
+            <div class="honest-footer">
+                <strong>Honest status:</strong> the accounts service is being deployed. If the form below 404s, the Worker isn't live yet. Try again in a few hours, or drop your email on the <a href="index.html#signup">main signup form</a> for a heads-up the moment it goes live.
+            </div>
+        </div>
+
+        <!-- ===== Magic-link sent state ===== -->
+        <div class="success-state" id="sentState">
+            <div class="check-icon" aria-hidden="true"></div>
+            <h2>Check your inbox.</h2>
+            <p>If <strong id="sentEmail">your address</strong> is valid, a magic link is on its way. Click it on this device to finish signing in. The link expires in 15 minutes.</p>
+            <p style="margin-top: 16px; font-size: 13px; color: var(--text-mute);">No email after a couple of minutes? Check spam, then try the form again. We always reply with "sent" even if the address is unknown, to keep account existence private.</p>
+        </div>
+
+        <!-- ===== Signed-in / download-ready state ===== -->
+        <div class="download-ready" id="downloadState">
+            <span class="eyebrow">Signed in</span>
+            <h2>Welcome to <em>SEAHORSE</em>.</h2>
+            <p class="lede">You're in as <strong id="userEmail">your@email.com</strong>. Pick the size that fits your machine. All three are free forever.</p>
+
+            <div class="download-pill is-pending">
+                <div class="download-pill-info">
+                    <div class="download-pill-name">SEAHORSE <em>Shallow</em><span class="pending-tag">Training</span></div>
+                    <div class="download-pill-meta">3B params · ~4 GB RAM · runs anywhere</div>
+                </div>
+                <a class="download-pill-cta" href="#" aria-disabled="true">Download</a>
+            </div>
+
+            <div class="download-pill is-pending">
+                <div class="download-pill-info">
+                    <div class="download-pill-name">SEAHORSE <em>Reef</em><span class="pending-tag">Training</span></div>
+                    <div class="download-pill-meta">7B params · ~8 GB VRAM · recommended</div>
+                </div>
+                <a class="download-pill-cta" href="#" aria-disabled="true">Download</a>
+            </div>
+
+            <div class="download-pill is-pending">
+                <div class="download-pill-info">
+                    <div class="download-pill-name">SEAHORSE <em>Deep</em><span class="pending-tag">Training</span></div>
+                    <div class="download-pill-meta">12B params · ~14 GB VRAM · most capable</div>
+                </div>
+                <a class="download-pill-cta" href="#" aria-disabled="true">Download</a>
+            </div>
+
+            <div class="honest-footer">
+                <strong>Honest status:</strong> all three model builds are still in training. Downloads light up as each one finishes. We'll email you when your chosen size lands. <strong>This isn't fake-it-till-you-make-it.</strong> The Reef build is being trained first, then the Shallow and Deep follow.
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a><br>
+    <span style="margin-top: 6px; display: inline-block; opacity: 0.7;">SEAHORSE is free for everyone, forever.</span>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// Account page wiring.
+//
+// Endpoints (Cloudflare Worker, see accounts-worker/src/index.js):
+//   POST /auth/start    body { email, purpose } → 200 ok (always)
+//   GET  /auth/confirm?token=XXX → sets session, redirects here
+//
+// WORKER_BASE: swap when the custom domain is wired
+// (probably https://accounts.seahorseapp.co.uk). For local dev or pre-
+// custom-domain testing, the workers.dev URL works too.
+// ─────────────────────────────────────────────────────────────
+const WORKER_BASE = "https://accounts.seahorseapp.co.uk";
+
+// Pre-fill the intent banner from ?intent=download&size=reef.
+const params = new URLSearchParams(location.search);
+const intent = params.get("intent");
+const size = (params.get("size") || "").toLowerCase();
+const sizeNames = { shallow: "Shallow", reef: "Reef", deep: "Deep" };
+if (intent === "download" && sizeNames[size]) {
+    document.getElementById("intentSize").textContent = sizeNames[size];
+    document.getElementById("intentBanner").style.display = "flex";
+    // Remember the size locally so a successful auth completes the
+    // user's original intent (kick them to the download).
+    try { localStorage.setItem("seahorse:intent:size", size); } catch {}
+}
+
+// Post-confirm state: when the Worker redirects back with ?signed_in=1,
+// flip into the download-ready card. (Future PR: actually read a
+// session cookie / JWT and show the user's real email.)
+if (params.get("signed_in") === "1") {
+    document.getElementById("signinState").style.display = "none";
+    document.getElementById("downloadState").style.display = "block";
+    const stashedEmail = (() => { try { return localStorage.getItem("seahorse:user:email"); } catch { return null; } })();
+    if (stashedEmail) document.getElementById("userEmail").textContent = stashedEmail;
+}
+
+// Form submit. Calls POST /auth/start. Returns 200 always (enumeration-
+// safe by design: we surface the same "check your inbox" message no
+// matter what so an attacker can't probe which addresses have accounts).
+const form = document.getElementById("authForm");
+const submitBtn = document.getElementById("submitBtn");
+const errorState = document.getElementById("errorState");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorState.style.display = "none";
+    const email = document.getElementById("email").value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorState.textContent = "That doesn't look like a valid email.";
+        errorState.style.display = "block";
+        return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+    try { localStorage.setItem("seahorse:user:email", email); } catch {}
+
+    try {
+        const resp = await fetch(`${WORKER_BASE}/auth/start`, {
+            method: "POST",
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, purpose: "signup" }),
+        });
+        // Worker returns 200 even on most internal failures; only a network
+        // error bubbles up here. Treat 200 as "we tried", show inbox card.
+        if (resp.ok) {
+            showSentState(email);
+        } else {
+            // Likely 404 → Worker not deployed yet. Be honest.
+            errorState.innerHTML = "The accounts service isn't live yet (HTTP " + resp.status + "). Drop your email on the <a href='index.html#signup' style='color:var(--navy);text-decoration:underline'>main signup form</a> and you'll be among the first told when it goes live.";
+            errorState.style.display = "block";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send me a magic link";
+        }
+    } catch (err) {
+        // Network error, most often "Worker not deployed yet" /
+        // CORS / no DNS. Honest copy beats a generic "something went
+        // wrong".
+        errorState.innerHTML = "Couldn't reach the accounts service (probably not deployed yet). Drop your email on the <a href='index.html#signup' style='color:var(--navy);text-decoration:underline'>main signup form</a> for a heads-up when it goes live.";
+        errorState.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send me a magic link";
+    }
+});
+
+function showSentState(email) {
+    document.getElementById("sentEmail").textContent = email;
+    document.getElementById("signinState").style.display = "none";
+    document.getElementById("sentState").style.display = "block";
+}
+</script>
+
+</body>
+</html>
